@@ -1,0 +1,30 @@
+{
+  "name": "SUOMSIANG CRYPTO",
+  "short_name": "SUOMSIANG",
+  "description": "SUOMSIANG CRYPTO: Qubic trading, wallet and network analytics.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#13070f",
+  "theme_color": "#13070f",
+  "icons": [
+    {
+      "src": "brand/suomsiang-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "brand/suomsiang-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "brand/suomsiang-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
