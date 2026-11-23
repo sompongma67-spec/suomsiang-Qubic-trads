@@ -223,6 +223,26 @@ tr.own td{background:color-mix(in srgb,var(--ac1) 10%,transparent)}
 @media(max-width:700px){.ctabtns{justify-content:flex-start}}
 @media(max-width:1250px){.header{flex-wrap:wrap}.nav{order:5;flex:1 1 100%}html{scroll-padding-top:140px}}
 @media(max-width:560px){html{scroll-padding-top:175px}}
+.gpick{position:fixed;inset:0;z-index:66;display:grid;place-items:center;padding:18px;background:rgba(4,1,8,.72);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+.gpick.open{opacity:1;visibility:visible;transition-delay:0s}
+.gpbox{width:min(640px,100%);padding:22px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015)),var(--card);border:1px solid color-mix(in srgb,var(--ac1) 40%,var(--bd));box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px color-mix(in srgb,var(--ac1) 18%,transparent);transform:translateY(14px) scale(.96);transition:transform .3s cubic-bezier(.2,.8,.2,1);display:grid;gap:16px;text-align:center}
+.gpick.open .gpbox{transform:none}.gpbox h2{margin:0}
+.gpgrid{display:grid;grid-template-columns:1fr 1fr;grid-auto-flow:row;gap:12px 14px}.gpgrid .gphelp{padding:7px 12px;font-size:.8rem}
+.gpcard{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 12px;border-radius:18px;border:1px solid var(--bd);background:rgba(255,255,255,.04);color:var(--tx);cursor:pointer;font:inherit;transition:transform .18s,border-color .18s,box-shadow .18s}
+.gpcard:hover,.gpcard:focus-visible{transform:translateY(-4px);border-color:var(--ac1);box-shadow:0 16px 40px rgba(0,0,0,.45),0 0 30px color-mix(in srgb,var(--ac1) 25%,transparent);outline:none}
+.gpcard svg{width:100%;max-width:160px;height:auto;filter:drop-shadow(0 8px 14px rgba(0,0,0,.5))}.gpcard b{font-size:1.1rem}.gpcard span{color:var(--tx2);font-size:.86rem;line-height:1.4}
+#pickBlaster{order:1}#pickSnooker{order:2}.gphelp[data-help=blaster]{order:3}.gphelp[data-help=snooker]{order:4}
+@media(max-width:520px){.gpgrid{grid-template-columns:1fr}#pickBlaster{order:1}.gphelp[data-help=blaster]{order:2}#pickSnooker{order:3}.gphelp[data-help=snooker]{order:4}}
+@media(prefers-reduced-motion:reduce){.gpick,.gpbox{transition:none}}
+@media(max-width:899px){#sn .gmbar{top:auto;bottom:calc(10px + env(safe-area-inset-bottom));left:8px;right:8px;justify-content:center}#sn .gmbar .btn{padding:8px 12px;font-size:.78rem}}
+.eco .tag{display:inline-block;margin-left:4px;padding:1px 8px;border-radius:999px;font:700 .68rem 'Manrope','Noto Sans Thai',sans-serif;color:var(--ink);background:linear-gradient(135deg,var(--ac1),var(--ac2));vertical-align:middle}
+.howto{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:16px;background:rgba(4,1,8,.78);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+.howto.open{opacity:1;visibility:visible;transition-delay:0s}
+.htbox{width:min(700px,100%);max-height:90vh;overflow:auto;padding:22px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015)),var(--card);border:1px solid color-mix(in srgb,var(--ac1) 40%,var(--bd));box-shadow:0 30px 80px rgba(0,0,0,.6);transform:translateY(14px) scale(.97);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.howto.open .htbox{transform:none}.htbox h2{margin:0 0 4px}.htbox h3{margin:18px 0 6px;font-size:1.02rem;color:var(--ac1)}.htbox h3:first-child{margin-top:6px}
+.htbox ul{margin:0;padding-left:18px;color:var(--tx2);line-height:1.55;font-size:.92rem}.htbox li{margin:3px 0}.htbox li b{color:var(--tx)}.htbox .btn{margin-top:18px}
+@media(max-width:560px){#gm .gmbar{gap:6px;right:8px}#gm .gmbar .btn{padding:6px 10px;font-size:.74rem}}
+@media(prefers-reduced-motion:reduce){.howto,.htbox{transition:none}}
 </style>
 </head>
 <body>
@@ -238,7 +258,7 @@ tr.own td{background:color-mix(in srgb,var(--ac1) 10%,transparent)}
 </header>
 <main>
 <section id="overview" class="on">
-  <div class="side-logo"><button type="button" class="logo-btn" id="logoBtn" aria-label="Play the Qubic shooting game"><img src="qubic-logo.png" alt="Qubic logo" onerror="this.closest('.side-logo').style.display='none'"><span class="logo-play">&#9654; Play game</span></button></div>
+  <div class="side-logo"><button type="button" class="logo-btn" id="logoBtn" aria-label="Choose a game"><img src="qubic-logo.png" alt="Qubic logo" onerror="this.closest('.side-logo').style.display='none'"><span class="logo-play">&#9654; Play game</span></button></div>
   <h2>Qubic network, live</h2>
   <p class="sub">Numbers come straight from the official Qubic RPC (rpc.qubic.org). Tick updates every 5 seconds, stats every minute.</p>
   <div class="hero">
@@ -298,6 +318,9 @@ tr.own td{background:color-mix(in srgb,var(--ac1) 10%,transparent)}
     <div class="card"><div class="pd">docs.qubic.org</div><h3>Qubic Docs</h3><p>Developer documentation, RPC reference and C++ smart contract guides.</p><a class="btn pri" href="https://docs.qubic.org/" target="_blank" rel="noopener noreferrer">Read Docs<span aria-hidden="true"> &#8599;</span></a></div>
     <div class="card"><div class="pd">github.com/qubic</div><h3>Qubic GitHub</h3><p>Open-source core node, smart contracts and tooling repositories.</p><a class="btn pri" href="https://github.com/qubic" target="_blank" rel="noopener noreferrer">View GitHub<span aria-hidden="true"> &#8599;</span></a></div>
     <div class="card"><div class="pd">qubic.church</div><h3>Qubic Church</h3><p>Independent research on Qubic and Aigarth: free books, an open research log, the BPP-9000 live terminal and a community forum.</p><a class="btn pri" href="https://qubic.church/" target="_blank" rel="noopener noreferrer">Visit Qubic Church<span aria-hidden="true"> &#8599;</span></a></div>
+    <div class="card"><div class="pd">platform.qubic.li <span class="tag">Mining</span></div><h3>QLI Platform</h3><p>The QLI Platform from Qubic.li, a web platform used for Qubic mining.</p><a class="btn pri" href="https://platform.qubic.li/platform" target="_blank" rel="noopener noreferrer">Open platform<span aria-hidden="true"> &#8599;</span></a></div>
+    <div class="card"><div class="pd">qubic.jetskipool.ai <span class="tag">Mining</span></div><h3>Jetski Pool</h3><p>Live Qubic mining dashboard with epoch progress, online miners and every miner's solutions, for SOLO and PPLNS. Apps for iOS and Android.</p><a class="btn pri" href="https://qubic.jetskipool.ai/pool" target="_blank" rel="noopener noreferrer">Open Jetski Pool<span aria-hidden="true"> &#8599;</span></a></div>
+    <div class="card"><div class="pd">theyard.meme <span class="tag">Trading</span></div><h3>The Yard</h3><p>Meme token launch and trading on Qubic (QDoge Protocol): create a token, train it on the curve, then escape into a Qswap pool. Meme tokens are very risky.</p><a class="btn pri" href="https://theyard.meme/" target="_blank" rel="noopener noreferrer">Open The Yard<span aria-hidden="true"> &#8599;</span></a></div>
   </div>
   <p class="src">Links open in a new tab. Descriptions are summarized from Qubic's official documentation and websites.</p>
 </section>
@@ -309,9 +332,32 @@ tr.own td{background:color-mix(in srgb,var(--ac1) 10%,transparent)}
 </section>
 </main>
 <footer><span>Data: Qubic official RPC (rpc.qubic.org). For information only, not financial advice.</span><span>SUOMSIANG CRYPTO</span></footer>
+<div id="howto" class="howto" role="dialog" aria-modal="true" aria-labelledby="htT" aria-hidden="true" inert>
+  <div class="htbox"><h2 id="htT">How to play</h2><div id="htBody"></div><button class="btn pri" id="htClose" type="button">Got it</button></div>
+</div>
+<div id="gpick" class="gpick" role="dialog" aria-modal="true" aria-label="Choose a game" aria-hidden="true" inert>
+  <div class="gpbox">
+    <h2>Choose a game</h2>
+    <div class="gpgrid">
+      <button class="gpcard" id="pickBlaster" type="button">
+        <svg viewBox="0 0 120 90" aria-hidden="true"><defs><linearGradient id="gA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--ac2)"/><stop offset="1" stop-color="var(--ac1)"/></linearGradient></defs><polygon points="60,10 100,30 60,50 20,30" fill="url(#gA)"/><polygon points="20,30 60,50 60,86 20,66" fill="var(--ac1)" opacity=".55"/><polygon points="100,30 60,50 60,86 100,66" fill="var(--ac1)" opacity=".85"/><path d="M60 12 L60 2" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+        <b>Cube Blaster</b><span>3D space shooter. Blast the cubes!</span></button>
+      <button class="btn gphelp" data-help="blaster" type="button">How to play</button>
+      <button class="gpcard" id="pickSnooker" type="button">
+        <svg viewBox="0 0 120 90" aria-hidden="true"><rect x="4" y="12" width="112" height="66" rx="10" fill="#0f7a42" stroke="#6b3a1e" stroke-width="6"/><circle cx="30" cy="45" r="8" fill="#f6f3e8"/><circle cx="70" cy="45" r="7" fill="#d4202a"/><circle cx="84" cy="38" r="7" fill="#d4202a"/><circle cx="84" cy="52" r="7" fill="#d4202a"/><circle cx="98" cy="45" r="7" fill="#1a1a1f"/><circle cx="14" cy="20" r="6" fill="#000"/></svg>
+        <b>Snooker</b><span>Play snooker against the computer or a friend.</span></button>
+      <button class="btn gphelp" data-help="snooker" type="button">How to play</button>
+    </div>
+    <button class="btn" id="gpClose" type="button">Close</button>
+  </div>
+</div>
+<div id="sn" class="gm" role="dialog" aria-modal="true" aria-label="Snooker game" aria-hidden="true" inert>
+  <canvas id="scv" tabindex="0" aria-label="Snooker game"></canvas>
+  <div class="gmbar"><button class="btn" id="snMenu" type="button">Menu</button><button class="btn" id="snMute" aria-pressed="true" type="button">Sound on</button><button class="btn" id="snHelp" type="button">How to play</button><button class="btn" id="snClose" type="button">Close snooker</button></div>
+</div>
 <div id="gm" class="gm" role="dialog" aria-modal="true" aria-label="Cube Blaster game" aria-hidden="true" inert>
   <canvas id="gcv" tabindex="0" aria-label="Cube Blaster game"></canvas>
-  <div class="gmbar"><button class="btn" id="gmMute" aria-pressed="true">Sound on</button><button class="btn" id="gmClose">Close game</button></div>
+  <div class="gmbar"><button class="btn" id="gmMute" aria-pressed="true">Sound on</button><button class="btn" id="gmHelp" type="button">How to play</button><button class="btn" id="gmClose">Close game</button></div>
 </div>
 <div id="fs" class="fs" role="dialog" aria-modal="true" aria-labelledby="fsT" aria-hidden="true" inert>
   <div class="fsin">
@@ -762,9 +808,233 @@ document.addEventListener('keydown',e=>{if(!open)return;const k=e.key.length===1
 document.addEventListener('keyup',e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=false});
 window.addEventListener('resize',()=>{if(open)size()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&open&&mode==='play')paused=true});
 $('gmClose').onclick=closeG;$('gmMute').onclick=()=>{muted=!muted;try{localStorage.setItem('suomsiang_cb_mute',muted?'1':'0')}catch(e){}muteLabel()};
-$('logoBtn').addEventListener('click',openG);
 Object.assign(D,{"Play the Qubic shooting game":"เล่นเกมยิง Qubic","Play game":"เล่นเกม","Score":"คะแนน","Wave":"รอบ","Best":"สูงสุด","Paused":"หยุดชั่วคราว","Rapid fire":"ยิงเร็ว","Triple shot":"ยิง 3 ทาง","GAME OVER":"จบเกม","New best!":"สถิติใหม่!","Click, tap or press Space to start":"คลิก แตะ หรือกด Space เพื่อเริ่ม","Move the mouse or your finger to steer. Your ship fires by itself. Shoot the cubes and grab the power-ups!":"ขยับเมาส์หรือนิ้วเพื่อบังคับยาน ยานยิงเองอัตโนมัติ ยิงลูกบาศก์และเก็บไอเทมพลัง!","Arrow keys / WASD also work. P to pause.":"ใช้ปุ่มลูกศรหรือ WASD ได้ด้วย กด P เพื่อหยุด","Click or press Space to play again":"คลิกหรือกด Space เพื่อเล่นอีกครั้ง","Sound on":"เสียง: เปิด","Sound off":"เสียง: ปิด","Close game":"ปิดเกม","Cube Blaster game":"เกม Cube Blaster","Live":"สด","Offline":"ออฟไลน์","Delayed":"ล่าช้า"});
-return{open:openG,close:closeG,get s(){return s},get mode(){return mode},refresh:muteLabel}})();
+return{open:openG,close:closeG,get s(){return s},get mode(){return mode},get isOpen(){return open},get paused(){return paused},pause(v){paused=v},refresh:muteLabel}})();
+
+
+/* ===== Snooker (physics, rules, CPU opponent) ===== */
+const SN=(()=>{
+const el=$('sn'),cv=$('scv'),cx=cv.getContext('2d');
+const L=1000,WD=500,R=8.5,CU=16,WOOD=40,FR=CU+WOOD,BX=206.5,DEC=170,VMAX=1250,EB=.96,EC=.74;
+const PK=[{x:-5,y:-5,r:23},{x:L+5,y:-5,r:23},{x:-5,y:WD+5,r:23},{x:L+5,y:WD+5,r:23},{x:L/2,y:-8,r:20},{x:L/2,y:WD+8,r:20}];
+const COL={red:'#d4202a',yellow:'#f1cb1c',green:'#1c8a49',brown:'#7b4a22',blue:'#2358c8',pink:'#ef86ae',black:'#1a1a1f',cue:'#f6f3e8'};
+const VAL={red:1,yellow:2,green:3,brown:4,blue:5,pink:6,black:7},SEQ=['yellow','green','brown','blue','pink','black'];
+const CN={red:'Red',yellow:'Yellow',green:'Green',brown:'Brown',blue:'Blue',pink:'Pink',black:'Black'};
+let W=0,H=0,dpr=1,s=1,ox=0,oy=0,rot=false,tb=null,raf=0,last=0,open=false,muted=false,aud=null;
+let mode=0,st='menu',balls=[],score=[0,0],cur=0,phase='red',brk=0,aim=0,power=0,drag=null,inHand=true,shot=null,settle=0,anim=0,msg=null,thinkT=0,plan=null,hint=true,keys={},winner=-1,best=0;
+try{muted=localStorage.getItem('suomsiang_sn_mute')==='1';best=+localStorage.getItem('suomsiang_sn_best')||0}catch(e){}
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),hex=h=>{h=h.replace('#','');const n=parseInt(h,16);return[n>>16&255,n>>8&255,n&255]},mixc=(c,k)=>`rgb(${hex(c).map(v=>clamp(Math.round(v*k),0,255)).join(',')})`;
+const font=px=>`800 ${px}px Manrope,'Noto Sans Thai',sans-serif`;
+const fitF=(txt,px,mw)=>{let p=px;cx.font=font(p);while(p>9&&cx.measureText(txt).width>mw){p--;cx.font=font(p)}return p};
+const nm=i=>mode===1?(i===0?T('You'):T('Computer')):T('Player')+' '+(i+1);
+/* sound */
+function snd(k,v=1){if(muted)return;try{aud=aud||new (window.AudioContext||window.webkitAudioContext)();const t=aud.currentTime,o=aud.createOscillator(),g=aud.createGain();o.connect(g);g.connect(aud.destination);
+  const P={ball:['sine',1800,700,.05,.06],rail:['triangle',260,120,.09,.07],pot:['sine',180,60,.22,.12],foul:['sawtooth',160,70,.35,.07],win:['triangle',520,1040,.5,.07]}[k];
+  o.type=P[0];o.frequency.setValueAtTime(P[1],t);o.frequency.exponentialRampToValueAtTime(P[2],t+P[3]);g.gain.setValueAtTime(P[4]*clamp(v,.1,1),t);g.gain.exponentialRampToValueAtTime(.0001,t+P[3]);o.start(t);o.stop(t+P[3]+.02)}catch(e){}}
+/* setup */
+function rack(){balls=[];const add=(k,x,y)=>balls.push({k,x,y,vx:0,vy:0,out:false,sp:{x,y}});
+  add('cue',BX-40,WD/2);add('yellow',BX,WD/2+82);add('green',BX,WD/2-82);add('brown',BX,WD/2);add('blue',L/2,WD/2);add('pink',750,WD/2);add('black',909,WD/2);
+  const ax=750+2*R+.8;for(let i=0;i<5;i++)for(let j=0;j<=i;j++)add('red',ax+i*(1.7321*R+.5),WD/2+(j-i/2)*(2*R+.5))}
+function newGame(m){mode=m;rack();score=[0,0];cur=0;phase='red';brk=0;aim=0;power=0;inHand=true;shot=null;msg=null;winner=-1;hint=true;st='aim';aim=Math.PI*0+0;toast(T('Drag the cue ball inside the D, then aim and shoot'),4)}
+const reds=()=>balls.filter(b=>b.k==='red'&&!b.out).length,lowest=()=>SEQ.find(k=>balls.some(b=>b.k===k&&!b.out));
+const isCpu=()=>mode===1&&cur===1;
+function toast(t,life=2.4){msg={t,life,max:life}}
+/* physics */
+function step(dt){
+  for(const b of balls){if(b.out)continue;b.x+=b.vx*dt;b.y+=b.vy*dt;const sp=Math.hypot(b.vx,b.vy);if(sp>0){const ns=sp-DEC*dt;if(ns<4){b.vx=b.vy=0}else{const f=ns/sp;b.vx*=f;b.vy*=f}}
+    for(const p of PK){if(Math.hypot(b.x-p.x,b.y-p.y)<p.r){b.out=true;b.vx=b.vy=0;if(shot){shot.potted.push(b);if(b.k==='cue')shot.scratch=true}sn_pot(b);break}}
+    if(b.out)continue;
+    if(b.x<R){b.x=R;if(b.vx<0){snd('rail',Math.abs(b.vx)/600);b.vx=-b.vx*EC}}else if(b.x>L-R){b.x=L-R;if(b.vx>0){snd('rail',b.vx/600);b.vx=-b.vx*EC}}
+    if(b.y<R){b.y=R;if(b.vy<0){snd('rail',Math.abs(b.vy)/600);b.vy=-b.vy*EC}}else if(b.y>WD-R){b.y=WD-R;if(b.vy>0){snd('rail',b.vy/600);b.vy=-b.vy*EC}}}
+  for(let i=0;i<balls.length;i++){const a=balls[i];if(a.out)continue;for(let j=i+1;j<balls.length;j++){const c=balls[j];if(c.out)continue;const dx=c.x-a.x,dy=c.y-a.y,d2=dx*dx+dy*dy;if(d2>=4*R*R||d2===0)continue;
+    const d=Math.sqrt(d2),nx=dx/d,ny=dy/d,ov=(2*R-d)/2;a.x-=nx*ov;a.y-=ny*ov;c.x+=nx*ov;c.y+=ny*ov;const rv=(a.vx-c.vx)*nx+(a.vy-c.vy)*ny;
+    if(rv>0){const im=(1+EB)/2*rv;a.vx-=im*nx;a.vy-=im*ny;c.vx+=im*nx;c.vy+=im*ny;snd('ball',rv/700);if(shot&&shot.first===null&&(a.k==='cue'||c.k==='cue'))shot.first=a.k==='cue'?c:a}
+    else if(shot&&shot.first===null&&(a.k==='cue'||c.k==='cue'))shot.first=a.k==='cue'?c:a}}}
+function sn_pot(b){snd('pot',.8)}
+const moving=()=>balls.some(b=>!b.out&&(b.vx||b.vy));
+function fire(angle,p){const c=balls[0];shot={first:null,potted:[],scratch:false,phase,seqT:lowest()};const v=clamp(p,.03,1)*VMAX;c.vx=Math.cos(angle)*v;c.vy=Math.sin(angle)*v;st='rolling';settle=0;hint=false;power=0;inHand=false;snd('ball',p)}
+/* rules */
+function respot(b){const free=(x,y)=>!balls.some(o=>o!==b&&!o.out&&Math.hypot(o.x-x,o.y-y)<2*R+.5);let p=b.sp;
+  if(!free(p.x,p.y)){p=null;for(const k of ['black','pink','blue','brown','green','yellow']){const o=balls.find(q=>q.k===k).sp;if(free(o.x,o.y)){p=o;break}}
+    if(!p)for(let d=2;d<L&&!p;d+=2){if(free(b.sp.x+d,b.sp.y))p={x:b.sp.x+d,y:b.sp.y};else if(free(b.sp.x-d,b.sp.y))p={x:b.sp.x-d,y:b.sp.y}}}
+  b.x=p.x;b.y=p.y;b.vx=b.vy=0;b.out=false}
+function placeCue(){const c=balls[0];c.out=false;c.vx=c.vy=0;const free=(x,y)=>!balls.some(o=>o!==c&&!o.out&&Math.hypot(o.x-x,o.y-y)<2*R+1);
+  for(const [x,y] of [[BX-40,WD/2],[BX-40,WD/2+30],[BX-40,WD/2-30],[BX-70,WD/2],[BX-70,WD/2+40],[BX-70,WD/2-40]])if(free(x,y)){c.x=x;c.y=y;break}inHand=true}
+function resolve(){const me=cur,pot=shot.potted,f=shot.first,ph=shot.phase,sq=shot.seqT;let foul=false,fv=4,why='';
+  const bad=(w,v)=>{foul=true;fv=Math.max(fv,v||0);if(!why)why=w};
+  if(shot.scratch)bad('Cue ball potted',0);
+  if(!f)bad('No ball hit',0);
+  else if(ph==='red'&&f.k!=='red')bad('Wrong ball hit first',VAL[f.k]);
+  else if(ph==='color'&&f.k==='red')bad('Wrong ball hit first',4);
+  else if(ph==='seq'&&f.k!==sq)bad('Wrong ball hit first',Math.max(VAL[f.k],VAL[sq]));
+  const pp=pot.filter(b=>b.k!=='cue');
+  if(ph==='red')pp.forEach(b=>{if(b.k!=='red')bad('Wrong ball potted',VAL[b.k])});
+  else if(ph==='color'){if(pp.length>1||pp.some(b=>b.k==='red'||(f&&b.k!==f.k)))pp.forEach(b=>{if(b.k==='red'||(f&&b.k!==f.k)||pp.length>1)bad('Wrong ball potted',VAL[b.k])})}
+  else pp.forEach(b=>{if(b.k!==sq)bad('Wrong ball potted',VAL[b.k])});
+  fv=Math.min(7,fv);
+  const rem=reds(),nextPh=()=>rem>0?'red':'seq';
+  if(foul){score[1-me]+=fv;brk=0;pp.forEach(b=>{if(b.k!=='red')respot(b)});if(shot.scratch)placeCue();else inHand=false;
+    toast(`${T('Foul!')} ${T(why)}. ${fv} ${T('points to')} ${nm(1-me)}`,3.4);snd('foul');cur=1-me;phase=nextPh();if(!shot.scratch)inHand=false}
+  else if(pp.length===0){brk=0;cur=1-me;phase=nextPh();toast(`${nm(cur)}`,1.6)}
+  else{const pts=pp.reduce((a,b)=>a+VAL[b.k],0);score[me]+=pts;brk+=pts;
+    if(ph==='red'){phase='color';toast(`${nm(me)}: +${pts}`,1.6)}
+    else if(ph==='color'){pp.forEach(b=>respot(b));phase=rem>0?'red':'seq';toast(`${nm(me)}: +${pts}`,1.6)}
+    else{if(pp.some(b=>b.k==='black')){finish();return}phase='seq';toast(`${nm(me)}: +${pts}`,1.6)}}
+  if(!foul&&ph!=='seq'&&phase==='seq'&&!lowest()){finish();return}
+  startTurn()}
+function finish(){st='over';winner=score[0]===score[1]?-1:(score[0]>score[1]?0:1);if(mode===1&&score[0]>best){best=score[0];try{localStorage.setItem('suomsiang_sn_best',best)}catch(e){}}snd('win')}
+function startTurn(){shot=null;if(inHand&&isCpu())inHand=false;
+  if(isCpu()){st='think';thinkT=1.1;plan=null;const c=balls[0];if(c.out)placeCue();planShot()}else{st='aim';const c=balls[0];if(c.out)placeCue()}}
+/* CPU */
+function targets(){return phase==='red'?balls.filter(b=>b.k==='red'&&!b.out):phase==='color'?balls.filter(b=>b.k!=='red'&&b.k!=='cue'&&!b.out):balls.filter(b=>b.k===lowest()&&!b.out)}
+const segd=(px,py,ax,ay,bx,by)=>{const dx=bx-ax,dy=by-ay,l2=dx*dx+dy*dy||1,t=clamp(((px-ax)*dx+(py-ay)*dy)/l2,0,1);return Math.hypot(px-(ax+t*dx),py-(ay+t*dy))};
+function planShot(){const c=balls[0];let bestS=-1,B=null;const T0=targets();
+  for(const t of T0)for(const p of PK){const px=p.x<0?4:p.x>L?L-4:p.x,py=p.y<0?4:p.y>WD?WD-4:p.y,dx=px-t.x,dy=py-t.y,d2=Math.hypot(dx,dy),ux=dx/d2,uy=dy/d2,gx=t.x-ux*2*R,gy=t.y-uy*2*R;
+    if(gx<R||gx>L-R||gy<R||gy>WD-R)continue;const d1=Math.hypot(gx-c.x,gy-c.y),vx=(gx-c.x)/d1,vy=(gy-c.y)/d1,cs=vx*ux+vy*uy;if(cs<.32)continue;
+    let ok=true;for(const o of balls){if(o===c||o===t||o.out)continue;if(segd(o.x,o.y,c.x,c.y,gx,gy)<2*R-.5||segd(o.x,o.y,t.x,t.y,px,py)<2*R-.5){ok=false;break}}
+    if(!ok)continue;const sc=cs*cs/(1+(d1+d2)/500)+(phase==='color'?VAL[t.k]*.03:0);if(sc>bestS){bestS=sc;B={a:Math.atan2(gy-c.y,gx-c.x),d:d1+d2/Math.max(cs,.4),d1,d2,t}}}
+  if(B){const v=Math.sqrt(2*DEC*B.d)+140,err=(Math.random()-.5)*2*(.35+(B.d1+B.d2)/1300)*Math.PI/180;plan={a:B.a+err,p:clamp(v/VMAX,.2,1)}}
+  else{let n=null,nd=1e9;for(const t of T0){const d=Math.hypot(t.x-c.x,t.y-c.y);if(d<nd){nd=d;n=t}}plan=n?{a:Math.atan2(n.y-c.y,n.x-c.x),p:.32}:{a:0,p:.3}}}
+/* layout + table render */
+function size(){dpr=Math.min(window.devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;const top=70,bot=W<900?116:64,aw=W-20,ah=H-top-bot,fw=L+2*FR,fh=WD+2*FR;
+  const sn=Math.min(aw/fw,ah/fh),sr=Math.min(aw/fh,ah/fw);rot=sr>sn*1.12;s=rot?sr:sn;const tw=(rot?fh:fw)*s,th=(rot?fw:fh)*s;ox=(W-tw)/2;oy=top+(ah-th)/2;buildTable()}
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
+function buildTable(){const k=s*dpr,fw=L+2*FR,fh=WD+2*FR;tb=document.createElement('canvas');tb.width=Math.ceil(fw*k);tb.height=Math.ceil(fh*k);const c=tb.getContext('2d');c.scale(k,k);c.translate(FR,FR);
+  let g=c.createLinearGradient(0,-FR,0,WD+FR);g.addColorStop(0,'#7a4425');g.addColorStop(.5,'#4a2410');g.addColorStop(1,'#2e1508');rr(c,-FR,-FR,fw,fh,30);c.fillStyle=g;c.fill();
+  c.lineWidth=2;c.strokeStyle='rgba(255,220,170,.35)';rr(c,-FR+2,-FR+2,fw-4,fh-4,28);c.stroke();c.strokeStyle='rgba(0,0,0,.5)';rr(c,-CU-5,-CU-5,L+2*CU+10,WD+2*CU+10,8);c.lineWidth=5;c.stroke();
+  g=c.createLinearGradient(0,-CU,0,WD+CU);g.addColorStop(0,'#0e6a3c');g.addColorStop(1,'#0a4a2a');c.fillStyle=g;rr(c,-CU,-CU,L+2*CU,WD+2*CU,5);c.fill();
+  g=c.createRadialGradient(L/2,WD/2,40,L/2,WD/2,L*.62);g.addColorStop(0,'#27a15f');g.addColorStop(.6,'#178a4b');g.addColorStop(1,'#0c5c33');c.fillStyle=g;c.fillRect(0,0,L,WD);
+  for(let i=0;i<9000;i++){c.fillStyle=Math.random()<.5?'rgba(255,255,255,.035)':'rgba(0,0,0,.05)';c.fillRect(Math.random()*L,Math.random()*WD,1.2,1.2)}
+  c.strokeStyle='rgba(255,255,255,.1)';c.lineWidth=1.5;c.strokeRect(0,0,L,WD);c.strokeStyle='rgba(0,0,0,.35)';c.lineWidth=3;c.strokeRect(-1.5,-1.5,L+3,WD+3);
+  c.strokeStyle='rgba(255,255,255,.4)';c.lineWidth=1.3;c.beginPath();c.moveTo(BX,0);c.lineTo(BX,WD);c.stroke();c.beginPath();c.arc(BX,WD/2,82,Math.PI/2,Math.PI*1.5);c.stroke();
+  c.fillStyle='rgba(255,255,255,.5)';for(const b of ['yellow','green','brown','blue','pink','black']){const sp=[{x:BX,y:WD/2+82},{x:BX,y:WD/2-82},{x:BX,y:WD/2},{x:L/2,y:WD/2},{x:750,y:WD/2},{x:909,y:WD/2}][SEQ.indexOf(b)];c.beginPath();c.arc(sp.x,sp.y,2.2,0,7);c.fill()}
+  c.fillStyle='rgba(255,235,200,.75)';for(let i=1;i<8;i++){if(i===4)continue;for(const y of[-CU-WOOD/2,WD+CU+WOOD/2]){c.save();c.translate(i*L/8,y);c.rotate(Math.PI/4);c.fillRect(-3,-3,6,6);c.restore()}}for(let i=1;i<4;i++)for(const x of[-CU-WOOD/2,L+CU+WOOD/2]){c.save();c.translate(x,i*WD/4);c.rotate(Math.PI/4);c.fillRect(-3,-3,6,6);c.restore()}
+  for(const p of PK){g=c.createRadialGradient(p.x,p.y,p.r*.3,p.x,p.y,p.r+5);g.addColorStop(0,'#000');g.addColorStop(.8,'#07070a');g.addColorStop(1,'#caa24a');c.fillStyle=g;c.beginPath();c.arc(p.x,p.y,p.r+4,0,7);c.fill();c.fillStyle='#030304';c.beginPath();c.arc(p.x,p.y,p.r,0,7);c.fill();c.strokeStyle='rgba(255,230,160,.5)';c.lineWidth=1.5;c.beginPath();c.arc(p.x,p.y,p.r+3,0,7);c.stroke()}}
+/* drawing */
+function setTf(c){const k=s*dpr,X=(ox+FR*s)*dpr,Y=(oy+FR*s)*dpr;rot?c.setTransform(0,k,k,0,X,Y):c.setTransform(k,0,0,k,X,Y)}
+function ball(b){const c=cx;c.save();c.fillStyle='rgba(0,0,0,.35)';c.beginPath();c.ellipse(b.x+R*.4,b.y+R*.55,R*1.02,R*.9,0,0,7);c.fill();
+  const g=c.createRadialGradient(b.x-R*.38,b.y-R*.42,R*.08,b.x,b.y,R*1.1),col=COL[b.k];g.addColorStop(0,mixc(col,1.9));g.addColorStop(.35,mixc(col,1.1));g.addColorStop(1,mixc(col,.42));c.fillStyle=g;c.beginPath();c.arc(b.x,b.y,R,0,7);c.fill();
+  c.fillStyle='rgba(255,255,255,.75)';c.beginPath();c.ellipse(b.x-R*.35,b.y-R*.4,R*.28,R*.17,-.7,0,7);c.fill();c.restore()}
+function aimRay(){const c=balls[0],dx=Math.cos(aim),dy=Math.sin(aim);let tm=1e9,hit=null;
+  for(const b of balls){if(b===c||b.out)continue;const qx=b.x-c.x,qy=b.y-c.y,t=qx*dx+qy*dy;if(t<0)continue;const d2=qx*qx+qy*qy-t*t;if(d2>4*R*R)continue;const tt=t-Math.sqrt(4*R*R-d2);if(tt>0&&tt<tm){tm=tt;hit=b}}
+  const wx=dx>1e-6?(L-R-c.x)/dx:dx<-1e-6?(R-c.x)/dx:1e9,wy=dy>1e-6?(WD-R-c.y)/dy:dy<-1e-6?(R-c.y)/dy:1e9;const tw=Math.min(wx,wy);if(tw<tm){tm=tw;hit=null}return{t:tm,hit,dx,dy}}
+function guide(){const c=balls[0],r=aimRay(),gx=c.x+r.dx*r.t,gy=c.y+r.dy*r.t,q=cx;q.save();q.setLineDash([6,7]);q.lineWidth=1.6;q.strokeStyle='rgba(255,255,255,.8)';q.beginPath();q.moveTo(c.x,c.y);q.lineTo(gx,gy);q.stroke();q.setLineDash([]);
+  q.strokeStyle='rgba(255,255,255,.9)';q.beginPath();q.arc(gx,gy,R,0,7);q.stroke();
+  if(r.hit){const nx=(r.hit.x-gx)/(2*R),ny=(r.hit.y-gy)/(2*R);q.strokeStyle=COL[r.hit.k]==='#1a1a1f'?'#aaa':COL[r.hit.k];q.lineWidth=2.4;q.beginPath();q.moveTo(r.hit.x,r.hit.y);q.lineTo(r.hit.x+nx*70,r.hit.y+ny*70);q.stroke();
+    const dot=r.dx*nx+r.dy*ny,tx=r.dx-dot*nx,ty=r.dy-dot*ny;q.strokeStyle='rgba(255,255,255,.55)';q.lineWidth=1.4;q.beginPath();q.moveTo(gx,gy);q.lineTo(gx+tx*45,gy+ty*45);q.stroke()}q.restore()}
+function cue(){const c=balls[0],pull=anim>0?(1-anim)*(14+power*70):(14+power*70),len=520,d=R+pull,x0=c.x-Math.cos(aim)*d,y0=c.y-Math.sin(aim)*d,x1=x0-Math.cos(aim)*len,y1=y0-Math.sin(aim)*len,q=cx;
+  q.save();q.lineCap='butt';const nx=-Math.sin(aim),ny=Math.cos(aim);q.fillStyle='rgba(0,0,0,.28)';q.beginPath();q.moveTo(x0+nx*1.6+4,y0+ny*1.6+6);q.lineTo(x1+nx*4.2+4,y1+ny*4.2+6);q.lineTo(x1-nx*4.2+4,y1-ny*4.2+6);q.lineTo(x0-nx*1.6+4,y0-ny*1.6+6);q.fill();
+  const g=q.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,'#f1d9a8');g.addColorStop(.55,'#c28a4a');g.addColorStop(.56,'#2a1a10');g.addColorStop(1,'#120a05');q.fillStyle=g;q.beginPath();q.moveTo(x0+nx*1.6,y0+ny*1.6);q.lineTo(x1+nx*4.2,y1+ny*4.2);q.lineTo(x1-nx*4.2,y1-ny*4.2);q.lineTo(x0-nx*1.6,y0-ny*1.6);q.fill();
+  q.strokeStyle='#e9e9ee';q.lineWidth=3.2;q.beginPath();q.moveTo(x0,y0);q.lineTo(x0-Math.cos(aim)*5,y0-Math.sin(aim)*5);q.stroke();q.strokeStyle='#2d6fd6';q.lineWidth=3.2;q.beginPath();q.moveTo(x0,y0);q.lineTo(x0+Math.cos(aim)*1.5,y0+Math.sin(aim)*1.5);q.stroke();q.restore()}
+function bg(){const g=cx.createRadialGradient(W/2,H*.5,0,W/2,H*.5,Math.max(W,H)*.75);g.addColorStop(0,'#1d1020');g.addColorStop(1,'#07040a');cx.fillStyle=g;cx.fillRect(0,0,W,H)}
+function draw(){cx.setTransform(dpr,0,0,dpr,0,0);bg();
+  setTf(cx);cx.save();cx.translate(-FR,-FR);cx.drawImage(tb,0,0,L+2*FR,WD+2*FR);cx.restore();
+  if(st!=='menu'){const bl=balls.filter(b=>!b.out);bl.forEach(ball);
+    if(st==='aim'&&!isCpu()||st==='think'||st==='shooting'){if(!balls[0].out){guide();cue()}}}
+  cx.setTransform(dpr,0,0,dpr,0,0);hud()}
+function hud(){const u=clamp(W/46,12,18);cx.textBaseline='middle';
+  if(st==='menu'){dim(.62);cx.textAlign='center';cx.fillStyle='#fff';cx.font=font(clamp(W/9,34,86));cx.fillText('SNOOKER',W/2,H*.2);cx.font=font(u);cx.fillStyle='rgba(255,255,255,.75)';cx.fillText(T('Pot the reds, then a color. Highest score wins the frame.'),W/2,H*.2+clamp(W/9,34,86)*.8);
+    menuRects().forEach((r,i)=>{btn(r,T(i===0?'1 Player vs Computer':'2 Players'))});if(best>0){cx.font=font(u*.9);cx.fillStyle='rgba(255,255,255,.65)';cx.fillText(`${T('Best vs Computer')}: ${best}`,W/2,H*.82)}return}
+  cx.fillStyle='rgba(8,4,12,.78)';cx.fillRect(0,0,W,58);const pl=(i,x,al)=>{cx.textAlign=al;cx.fillStyle=cur===i&&st!=='over'?'#fff':'rgba(255,255,255,.55)';cx.font=font(u);cx.fillText(nm(i),x,18);cx.font=font(u*1.9);cx.fillText(score[i],x,41);if(cur===i&&st!=='over'){const gr=cx.createLinearGradient(al==='left'?x:x-120,0,al==='left'?x+120:x,0);gr.addColorStop(0,col2());gr.addColorStop(1,'rgba(0,0,0,0)');cx.fillStyle=gr;cx.fillRect(al==='left'?x:x-120,55,120,3)}};
+  pl(0,14,'left');pl(1,W<900?W-14:W-336,'right');cx.textAlign='center';cx.font=font(u);cx.fillStyle='rgba(255,255,255,.8)';
+  const tgt=phase==='red'?T('Next: Red'):phase==='color'?T('Next: any color'):`${T('Next')}: ${T(CN[lowest()]||'')}`;cx.fillText(`${T('Break')} ${brk}   \u00b7   ${tgt}`,W/2,20);cx.font=font(u*.85);cx.fillStyle='rgba(255,255,255,.55)';cx.fillText(`${T('Reds')} ${reds()}`,W/2,42);
+  if(msg){const a=clamp(msg.life/.5,0,1);cx.globalAlpha=a;const fp=fitF(msg.t,u*1.1,W-48);cx.font=font(fp);const tw=cx.measureText(msg.t).width+40;cx.fillStyle='rgba(8,4,12,.85)';rr(cx,W/2-tw/2,70,tw,38,19);cx.fill();cx.fillStyle='#fff';cx.fillText(msg.t,W/2,90);cx.globalAlpha=1}
+  if(st==='aim'&&!isCpu())bar();
+  if(st==='think'){cx.font=font(u);cx.fillStyle='rgba(255,255,255,.8)';cx.fillText(T('Computer is thinking...'),W/2,W<900?H-78:H-34)}
+  if(st==='over'){dim(.6);cx.fillStyle='#fff';cx.font=font(clamp(W/12,28,64));cx.fillText(winner<0?T('Draw'):`${nm(winner)} ${T('wins!')}`,W/2,H*.34);cx.font=font(u*2);cx.fillText(`${score[0]}  -  ${score[1]}`,W/2,H*.47);btn(overRect(),T('Play again'))}}
+const col2=()=>getComputedStyle(document.documentElement).getPropertyValue('--ac1').trim()||'#ff4fa3';
+function dim(a){cx.fillStyle=`rgba(5,2,10,${a})`;cx.fillRect(0,0,W,H)}
+function btn(r,t){const g=cx.createLinearGradient(r.x,r.y,r.x+r.w,r.y);g.addColorStop(0,col2());g.addColorStop(1,getComputedStyle(document.documentElement).getPropertyValue('--ac2').trim()||'#ff9ad5');cx.fillStyle=g;rr(cx,r.x,r.y,r.w,r.h,r.h/2);cx.fill();cx.fillStyle='#1b0610';cx.textAlign='center';cx.font=font(clamp(W/36,14,19));cx.fillText(t,r.x+r.w/2,r.y+r.h/2+1)}
+const menuRects=()=>{const w=Math.min(340,W-48),h=52,x=(W-w)/2,y=H*.46;return[{x,y,w,h},{x,y:y+h+16,w,h}]},overRect=()=>{const w=Math.min(260,W-48);return{x:(W-w)/2,y:H*.6,w,h:52}};
+const barR=()=>{const w=Math.min(380,W*.62);return{x:(W-w)/2,y:W<900?H-86:H-38,w,h:16}};
+function bar(){const r=barR(),q=cx;q.fillStyle='rgba(255,255,255,.14)';rr(q,r.x,r.y,r.w,r.h,8);q.fill();const g=q.createLinearGradient(r.x,0,r.x+r.w,0);g.addColorStop(0,'#3ce19a');g.addColorStop(.6,'#f1cb1c');g.addColorStop(1,'#ef3f4f');q.fillStyle=g;rr(q,r.x,r.y,Math.max(r.h,r.w*power),r.h,8);q.fill();q.fillStyle='#fff';q.beginPath();q.arc(r.x+r.w*power,r.y+r.h/2,12,0,7);q.fill();q.strokeStyle='rgba(0,0,0,.4)';q.lineWidth=2;q.stroke();
+  if(hint){q.textAlign='center';q.fillStyle='rgba(255,255,255,.85)';const ht=T('Aim with the mouse or finger. Drag the bar to set power, release to shoot.');q.font=font(fitF(ht,clamp(W/50,12,16),W-24));q.fillText(ht,W/2,r.y-18)}}
+/* loop */
+function loop(now){raf=requestAnimationFrame(loop);const dt=Math.min(.05,(now-last)/1000||.016);last=now;update(dt);draw()}
+function update(dt){if(msg){msg.life-=dt;if(msg.life<=0)msg=null}
+  if(st==='aim'&&!isCpu()){const k=(keys.ArrowRight||keys.d?1:0)-(keys.ArrowLeft||keys.a?1:0);if(k)aim+=k*dt*(keys.Shift?.15:.9);if(keys[' ']&&!drag){power=clamp(power+dt*.7,0,1)}}
+  if(st==='think'){thinkT-=dt;if(plan){aim+=((plan.a-aim+Math.PI*3)%(Math.PI*2)-Math.PI)*Math.min(1,dt*6)}if(thinkT<=0&&plan){aim=plan.a;power=plan.p;st='shooting';anim=1}}
+  if(st==='shooting'){anim-=dt/.16;if(anim<=0){anim=0;fire(aim,power)}}
+  if(st==='rolling'){let n=Math.ceil(Math.max(1,dt*240));for(let i=0;i<n;i++)step(dt/n);if(!moving()){settle+=dt;if(settle>.35)resolve()}else settle=0}}
+/* input */
+function toW(e){const r=cv.getBoundingClientRect(),px=e.clientX-r.left,py=e.clientY-r.top,X=ox+FR*s,Y=oy+FR*s;return rot?{x:(py-Y)/s,y:(px-X)/s,px,py}:{x:(px-X)/s,y:(py-Y)/s,px,py}}
+const inR=(p,r,pad=0)=>p.px>=r.x-pad&&p.px<=r.x+r.w+pad&&p.py>=r.y-pad&&p.py<=r.y+r.h+pad;
+function setAim(p){const c=balls[0];if(Math.hypot(p.x-c.x,p.y-c.y)>4)aim=Math.atan2(p.y-c.y,p.x-c.x)}
+function pwr(p){const r=barR();power=clamp((p.px-r.x)/r.w,0,1)}
+function canPlace(x,y){const c=balls[0];if(x>BX||x<R||Math.hypot(x-BX,y-WD/2)>82||y<R||y>WD-R)return false;return !balls.some(o=>o!==c&&!o.out&&Math.hypot(o.x-x,o.y-y)<2*R+1)}
+cv.addEventListener('pointerdown',e=>{const p=toW(e);cv.setPointerCapture&&cv.setPointerCapture(e.pointerId);
+  if(st==='menu'){menuRects().forEach((r,i)=>{if(inR(p,r))newGame(i===0?1:2)});return}
+  if(st==='over'){if(inR(p,overRect()))st='menu';return}
+  if(st==='aim'&&!isCpu()){if(inR(p,barR(),14)){drag='power';pwr(p)}else if(inHand&&Math.hypot(p.x-balls[0].x,p.y-balls[0].y)<R*2.4){drag='cue'}else{drag='aim';setAim(p)}}});
+cv.addEventListener('pointermove',e=>{const p=toW(e);if(st!=='aim'||isCpu())return;
+  if(drag==='power')pwr(p);else if(drag==='cue'){let x=Math.min(p.x,BX),y=p.y;const dx=x-BX,dy=y-WD/2,d=Math.hypot(dx,dy);if(d>81){x=BX+dx/d*81;y=WD/2+dy/d*81}if(canPlace(x,y)){balls[0].x=x;balls[0].y=y}}
+  else if(drag==='aim'||(!drag&&e.pointerType!=='touch'&&!inR(p,barR(),14)))setAim(p)});
+const up=()=>{if(drag==='power'){if(power>.04&&st==='aim'){st='shooting';anim=1}else power=0}drag=null};cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',()=>{drag=null});
+document.addEventListener('keydown',e=>{if(!open)return;const k=e.key.length===1?e.key.toLowerCase():e.key;if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();if(k==='Escape'){closeS();return}keys[k]=true;if(e.shiftKey)keys.Shift=true;
+  if(st==='menu'){if(k==='1')newGame(1);if(k==='2')newGame(2)}else if(st==='over'&&(k===' '||k==='Enter'))st='menu'});
+document.addEventListener('keyup',e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=false;if(k==='Shift')keys.Shift=false;if(k===' '&&open&&st==='aim'&&!isCpu()){if(power>.04){st='shooting';anim=1}else power=0}});
+function muteLabel(){const b=$('snMute');b.textContent=T(muted?'Sound off':'Sound on');b.setAttribute('aria-pressed',!muted)}
+function openS(){if(open)return;open=true;el.inert=false;el.setAttribute('aria-hidden','false');el.classList.add('open');document.body.style.overflow='hidden';size();st='menu';rack();muteLabel();last=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(loop);setTimeout(()=>cv.focus({preventScroll:true}),60)}
+function closeS(){if(!open)return;open=false;cancelAnimationFrame(raf);el.classList.remove('open');el.inert=true;el.setAttribute('aria-hidden','true');document.body.style.overflow='';const b=$('logoBtn');if(b)b.focus({preventScroll:true})}
+window.addEventListener('resize',()=>{if(open)size()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&open)keys={}});
+$('snClose').onclick=closeS;$('snMenu').onclick=()=>{if(open){st='menu';rack()}};$('snMute').onclick=()=>{muted=!muted;try{localStorage.setItem('suomsiang_sn_mute',muted?'1':'0')}catch(e){}muteLabel()};
+Object.assign(D,{"Snooker":"สนุกเกอร์","Close snooker":"ปิดเกม","Menu":"เมนู","1 Player vs Computer":"1 ผู้เล่น สู้กับคอมพิวเตอร์","2 Players":"2 ผู้เล่น","Pot the reds, then a color. Highest score wins the frame.":"ลงลูกแดงแล้วตามด้วยลูกสี คะแนนสูงสุดชนะเฟรม","Best vs Computer":"สถิติสูงสุดเมื่อเจอคอมพิวเตอร์","You":"คุณ","Computer":"คอมพิวเตอร์","Player":"ผู้เล่น","Break":"เบรก","Reds":"ลูกแดงเหลือ","Next":"ต่อไป","Next: Red":"ต่อไป: ลูกแดง","Next: any color":"ต่อไป: ลูกสีใดก็ได้","Red":"แดง","Yellow":"เหลือง","Green":"เขียว","Brown":"น้ำตาล","Blue":"น้ำเงิน","Pink":"ชมพู","Black":"ดำ","Foul!":"ฟาวล์!","points to":"คะแนนให้","Cue ball potted":"ลงลูกขาว","No ball hit":"ไม่โดนลูกใดเลย","Wrong ball hit first":"โดนลูกผิดก่อน","Wrong ball potted":"ลงลูกผิด","Computer is thinking...":"คอมพิวเตอร์กำลังคิด...","Draw":"เสมอ","wins!":"ชนะ!","Play again":"เล่นอีกครั้ง","Drag the cue ball inside the D, then aim and shoot":"ลากลูกขาวในครึ่งวงกลม D แล้วเล็งและยิง","Aim with the mouse or finger. Drag the bar to set power, release to shoot.":"เล็งด้วยเมาส์หรือนิ้ว ลากแถบเพื่อกำหนดแรง ปล่อยเพื่อยิง"});
+return{open:openS,close:closeS,get st(){return st},get balls(){return balls},get score(){return score},get cur(){return cur},get phase(){return phase},get mode(){return mode},get open_(){return open},newGame,fire:(a,p)=>{aim=a;fire(a,p)},resolve,set cur(v){cur=v},set phase(v){phase=v},aimSet:a=>{aim=a}}})();
+
+/* ===== Game picker (logo button) ===== */
+(()=>{const el=$('gpick'),logo=$('logoBtn');
+  const op=()=>{el.inert=false;el.setAttribute('aria-hidden','false');el.classList.add('open');document.body.style.overflow='hidden';$('pickSnooker').focus()};
+  const cl=(restore=true)=>{el.classList.remove('open');el.inert=true;el.setAttribute('aria-hidden','true');if(restore){document.body.style.overflow='';logo.focus({preventScroll:true})}};
+  logo.addEventListener('click',op);$('pickBlaster').onclick=()=>{cl(false);GM.open()};$('pickSnooker').onclick=()=>{cl(false);SN.open()};$('gpClose').onclick=()=>cl();
+  el.addEventListener('click',e=>{if(e.target===el)cl()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el.classList.contains('open'))cl()});
+  Object.assign(D,{"Choose a game":"เลือกเกม","3D space shooter. Blast the cubes!":"เกมยิงอวกาศสามมิติ ยิงลูกบาศก์ให้หมด!","Play snooker against the computer or a friend.":"เล่นสนุกเกอร์กับคอมพิวเตอร์หรือเพื่อน"})})();
+
+
+/* ===== How to play (both games, TH / EN) ===== */
+const HELP=(()=>{const el=$('howto'),body=$('htBody');let from=null,which='',held=false;
+  const DATA={
+   blaster:[['Goal','Shoot the cubes flying at you and survive as long as you can. Every 18 cubes you clear starts a new, faster wave.'],
+    ['Move','Move the mouse or drag your finger to steer your ship. Arrow keys or WASD work too.'],
+    ['Fire','Your ship fires by itself. Just line it up with the cubes.'],
+    ['Cubes and lives','Pink cubes give 10 points, small fast ones 20, and big armored ones take 4 hits for 50 points. A cube that hits your ship costs 1 life. You start with 3.'],
+    ['Combo','Keep hitting cubes without a break to build a combo up to x8 and multiply your points.'],
+    ['Power-ups','Fly into the glowing cubes: R is rapid fire and 3 is triple shot (8 seconds each), + is an extra life (up to 5).'],
+    ['Keys','Click, tap or press Space to start. P pauses. Esc closes the game.']],
+   snooker:[['Goal','Score more points than your opponent. Pot a red (1 point), then a color (2 to 7 points), and repeat.'],
+    ['Ball colors','Yellow 2, green 3, brown 4, blue 5, pink 6, black 7. After a red you can choose any color: the first color your white ball touches is your choice. Colors return to their spots while reds remain.'],
+    ['Endgame','When all reds are gone, pot the colors in order from yellow to black. The frame ends when the black is potted and the higher score wins.'],
+    ['Aim','Move the mouse or drag your finger on the table to aim. The dotted line shows where the white ball will hit. The left and right arrow keys also turn the aim (hold Shift for fine control).'],
+    ['Shoot','Drag the power bar at the bottom and release to shoot. The further you drag, the harder the shot. On a keyboard, hold Space and release.'],
+    ['White ball','Before the first shot, and after you pot the white, drag the white ball anywhere inside the D.'],
+    ['Fouls','Potting the white, hitting nothing, hitting the wrong ball first or potting the wrong ball is a foul. Your opponent gets 4 to 7 points and your turn ends.'],
+    ['Modes','Play against the computer or take turns with a friend on the same device. Use the Menu button to switch.']]};
+  const TITLE={blaster:'Cube Blaster',snooker:'Snooker'};
+  function render(){body.innerHTML=`<p class="sub" style="margin:0 0 4px"><b>${esc(T(TITLE[which]))}</b></p>`+DATA[which].map(([h,x])=>`<h3>${esc(T(h))}</h3><ul><li>${esc(T(x))}</li></ul>`).join('')}
+  function open(g){which=g;from=document.activeElement;render();held=g==='blaster'&&GM.mode==='play'&&!GM.paused;if(held)GM.pause(true);el.inert=false;el.setAttribute('aria-hidden','false');el.classList.add('open');$('htClose').focus()}
+  function close(){el.classList.remove('open');el.inert=true;el.setAttribute('aria-hidden','true');if(held){GM.pause(false);held=false}if(from&&from.focus)from.focus({preventScroll:true})}
+  const isOpen=()=>el.classList.contains('open');
+  ['keydown','keyup'].forEach(ev=>document.addEventListener(ev,e=>{if(!isOpen())return;if(ev==='keydown'&&e.key==='Escape'){close()}e.stopImmediatePropagation()},true));
+  document.addEventListener('keydown',e=>{if(isOpen())return;if(e.key==='h'||e.key==='H'||e.key==='?'){if(GM.isOpen)open('blaster');else if(SN.open_)open('snooker')}});
+  $('htClose').onclick=close;el.addEventListener('click',e=>{if(e.target===el)close()});
+  $('gmHelp').onclick=()=>open('blaster');$('snHelp').onclick=()=>open('snooker');document.querySelectorAll('[data-help]').forEach(b=>b.onclick=()=>open(b.dataset.help));
+  Object.assign(D,{"How to play":"วิธีเล่น","Got it":"เข้าใจแล้ว","Goal":"เป้าหมาย","Move":"การเคลื่อนที่","Fire":"การยิง","Cubes and lives":"ลูกบาศก์และชีวิต","Combo":"คอมโบ","Power-ups":"ไอเทมพลัง","Keys":"ปุ่มลัด","Ball colors":"ลูกสี","Endgame":"ช่วงท้ายเฟรม","Aim":"การเล็ง","Shoot":"การยิง","White ball":"ลูกขาว","Fouls":"ฟาวล์","Modes":"โหมดการเล่น",
+   "Shoot the cubes flying at you and survive as long as you can. Every 18 cubes you clear starts a new, faster wave.":"ยิงลูกบาศก์ที่พุ่งเข้าหาคุณและเอาตัวรอดให้นานที่สุด ทุกครั้งที่ยิงครบ 18 ลูก จะขึ้นรอบใหม่ที่เร็วขึ้น",
+   "Move the mouse or drag your finger to steer your ship. Arrow keys or WASD work too.":"ขยับเมาส์หรือลากนิ้วเพื่อบังคับยาน ใช้ปุ่มลูกศรหรือ WASD ได้เช่นกัน",
+   "Your ship fires by itself. Just line it up with the cubes.":"ยานยิงเองอัตโนมัติ แค่เล็งให้ตรงกับลูกบาศก์",
+   "Pink cubes give 10 points, small fast ones 20, and big armored ones take 4 hits for 50 points. A cube that hits your ship costs 1 life. You start with 3.":"ลูกบาศก์สีชมพูให้ 10 คะแนน ลูกเล็กที่พุ่งเร็วให้ 20 คะแนน ลูกใหญ่หุ้มเกราะต้องยิง 4 ครั้งให้ 50 คะแนน ลูกที่ชนยานทำให้เสียชีวิต 1 ดวง เริ่มต้นมี 3 ดวง",
+   "Keep hitting cubes without a break to build a combo up to x8 and multiply your points.":"ยิงโดนต่อเนื่องไม่ขาดช่วงเพื่อสะสมคอมโบสูงสุด x8 และคูณคะแนน",
+   "Fly into the glowing cubes: R is rapid fire and 3 is triple shot (8 seconds each), + is an extra life (up to 5).":"บินชนลูกบาศก์เรืองแสง: R คือยิงเร็ว 3 คือยิง 3 ทาง (อย่างละ 8 วินาที) + คือเพิ่มชีวิต (สูงสุด 5 ดวง)",
+   "Click, tap or press Space to start. P pauses. Esc closes the game.":"คลิก แตะ หรือกด Space เพื่อเริ่ม กด P เพื่อหยุดชั่วคราว กด Esc เพื่อปิดเกม",
+   "Score more points than your opponent. Pot a red (1 point), then a color (2 to 7 points), and repeat.":"ทำคะแนนให้มากกว่าคู่ต่อสู้ ลงลูกแดง (1 คะแนน) แล้วตามด้วยลูกสี (2 ถึง 7 คะแนน) ทำซ้ำไปเรื่อย ๆ",
+   "Yellow 2, green 3, brown 4, blue 5, pink 6, black 7. After a red you can choose any color: the first color your white ball touches is your choice. Colors return to their spots while reds remain.":"เหลือง 2 เขียว 3 น้ำตาล 4 น้ำเงิน 5 ชมพู 6 ดำ 7 หลังลงลูกแดงเลือกลูกสีใดก็ได้ ลูกสีแรกที่ลูกขาวชนถือเป็นลูกที่คุณเลือก ลูกสีจะถูกตั้งกลับที่เดิมตราบที่ยังมีลูกแดงเหลืออยู่",
+   "When all reds are gone, pot the colors in order from yellow to black. The frame ends when the black is potted and the higher score wins.":"เมื่อลูกแดงหมด ให้ลงลูกสีตามลำดับตั้งแต่เหลืองจนถึงดำ เฟรมจบเมื่อลงลูกดำได้ ใครคะแนนสูงกว่าชนะ",
+   "Move the mouse or drag your finger on the table to aim. The dotted line shows where the white ball will hit. The left and right arrow keys also turn the aim (hold Shift for fine control).":"ขยับเมาส์หรือลากนิ้วบนโต๊ะเพื่อเล็ง เส้นประแสดงจุดที่ลูกขาวจะชน ปุ่มลูกศรซ้ายขวาหมุนการเล็งได้ด้วย (กด Shift ค้างเพื่อเล็งละเอียด)",
+   "Drag the power bar at the bottom and release to shoot. The further you drag, the harder the shot. On a keyboard, hold Space and release.":"ลากแถบแรงด้านล่างแล้วปล่อยเพื่อยิง ยิ่งลากไกลยิ่งแรง ถ้าใช้คีย์บอร์ดให้กด Space ค้างแล้วปล่อย",
+   "Before the first shot, and after you pot the white, drag the white ball anywhere inside the D.":"ก่อนยิงนัดแรก และหลังลงลูกขาว ให้ลากลูกขาวไปวางตรงไหนก็ได้ภายในครึ่งวงกลม D",
+   "Potting the white, hitting nothing, hitting the wrong ball first or potting the wrong ball is a foul. Your opponent gets 4 to 7 points and your turn ends.":"ลงลูกขาว ไม่โดนลูกใดเลย โดนลูกผิดก่อน หรือลงลูกผิด ถือเป็นฟาวล์ คู่ต่อสู้ได้ 4 ถึง 7 คะแนนและตาของคุณจบ",
+   "Play against the computer or take turns with a friend on the same device. Use the Menu button to switch.":"เล่นกับคอมพิวเตอร์ หรือสลับกันเล่นกับเพื่อนบนเครื่องเดียวกัน กดปุ่มเมนูเพื่อสลับโหมด",
+   "Mining":"ขุด","Trading":"เทรด","The QLI Platform from Qubic.li, a web platform used for Qubic mining.":"QLI Platform จาก Qubic.li เว็บแพลตฟอร์มที่ใช้สำหรับการขุด Qubic","Open platform":"เปิดแพลตฟอร์ม","Live Qubic mining dashboard with epoch progress, online miners and every miner's solutions, for SOLO and PPLNS. Apps for iOS and Android.":"แดชบอร์ดการขุด Qubic แบบสด แสดงความคืบหน้า Epoch นักขุดที่ออนไลน์ และผลเฉลยของนักขุดทุกคน สำหรับ SOLO และ PPLNS มีแอปบน iOS และ Android","Open Jetski Pool":"เปิด Jetski Pool","Meme token launch and trading on Qubic (QDoge Protocol): create a token, train it on the curve, then escape into a Qswap pool. Meme tokens are very risky.":"แพลตฟอร์มเปิดตัวและเทรดมีมโทเคนบน Qubic (QDoge Protocol): สร้างโทเคน ฝึกบนเส้นโค้งราคา แล้วหลุดออกไปเป็นพูล Qswap มีมโทเคนเสี่ยงสูงมาก","Open The Yard":"เปิด The Yard"});
+  return{open,close,isOpen}})();
 
 /* boot */
 applyLang();
