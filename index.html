@@ -287,14 +287,6 @@ footer{padding-right:96px}
 .sl:hover,.sl:focus-visible{transform:translateY(-3px);border-color:var(--ac1);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 16px 36px rgba(0,0,0,.45),0 0 26px color-mix(in srgb,var(--ac1) 25%,transparent);outline:none}
 @media(min-width:1800px){.side-links{position:absolute;top:314px;left:-272px;width:218px;display:grid;gap:12px;margin:0}.sl{padding:14px 16px;font-size:1.22rem}}
 @media(prefers-reduced-motion:reduce){.sl{transition:none}.sl:hover{transform:none}}
-.sl.y{border-color:#ffd24d;color:#2a1d00;background:linear-gradient(135deg,#ffe777,#f4b52a);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 10px 26px rgba(244,181,42,.28)}
-.sl.g{border-color:#5af0b4;color:#032a1a;background:linear-gradient(135deg,#6af5bb,#1fbf7a);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 26px rgba(31,191,122,.28)}
-.sl.y i,.sl.g i{color:inherit}
-.sl.y:hover,.sl.y:focus-visible{border-color:#fff3b0;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 16px 36px rgba(244,181,42,.45),0 0 28px rgba(255,214,77,.5)}
-.sl.g:hover,.sl.g:focus-visible{border-color:#c6ffe6;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 16px 36px rgba(31,191,122,.45),0 0 28px rgba(90,240,180,.5)}
-.inst{display:inline-flex;align-items:center;gap:6px}.inst[hidden]{display:none}.inst svg{flex:none}
-@media(max-width:1340px){html.can-install .header{flex-wrap:wrap}html.can-install .nav{order:5;flex:1 1 100%}html.can-install{scroll-padding-top:140px}}
-@media(max-width:560px){html.can-install{scroll-padding-top:175px}}
 </style>
 </head>
 <body>
@@ -307,13 +299,13 @@ footer{padding-right:96px}
   <div class="lang" role="group" aria-label="Language"><button data-l="th" aria-pressed="false">TH</button><button data-l="en" aria-pressed="false">ENG</button></div>
   <span class="sp"></span>
   <div class="strip"><span><i class="dot" id="live" data-live></i>Epoch <b id="hEpoch">--</b></span><span>Tick <b id="hTick">--</b></span></div>
-  <button class="btn pri inst" id="instBtn" type="button" hidden title="Install app"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg><span>Install</span></button><span class="livemini" aria-hidden="true"><i class="dot" data-live></i></span><button class="btn" id="colorBtn" aria-expanded="false">Colors</button><button class="btn" id="theme" aria-label="Toggle light or dark">Light/Dark</button>
+  <span class="livemini" aria-hidden="true"><i class="dot" data-live></i></span><button class="btn" id="colorBtn" aria-expanded="false">Colors</button><button class="btn" id="theme" aria-label="Toggle light or dark">Light/Dark</button>
 </header>
 <main>
 <section id="overview" class="on">
   <nav class="side-links" aria-label="Quick links">
-    <a class="sl y" href="https://report.qubic.tools/dashboard/btc.html" target="_blank" rel="noopener noreferrer" title="Qubic Report: Colony vs Bitcoin (BPP-9000 live)"><span>BPP9000 &amp; BTC</span><i aria-hidden="true">&#8599;</i></a>
-    <a class="sl g" href="https://qubic.church/bpp9000/maria" target="_blank" rel="noopener noreferrer" title="Maria Aigarth trades BPP-9000, live (Qubic Church)"><span>Maria Aigarth &middot; Live</span><i aria-hidden="true">&#8599;</i></a>
+    <a class="sl" href="https://report.qubic.tools/dashboard/btc.html" target="_blank" rel="noopener noreferrer" title="Qubic Report: Colony vs Bitcoin (BPP-9000 live)"><span>BPP9000 &amp; BTC</span><i aria-hidden="true">&#8599;</i></a>
+    <a class="sl" href="https://sompongma67-spec.github.io/suomsiang-Qubic-trads/" target="_blank" rel="noopener noreferrer" title="SUOMSIANG Qubic Trads"><span>SUOMSIANG Qubic Trads</span><i aria-hidden="true">&#8599;</i></a>
   </nav>
   <div class="side-logo"><button type="button" class="logo-btn" id="logoBtn" aria-label="Choose a game"><img src="qubic-logo.png" alt="Qubic logo" onerror="this.closest('.side-logo').style.display='none'"><span class="logo-play">&#9654; Play game</span></button></div>
   <h2>Qubic network, live</h2>
@@ -1202,7 +1194,6 @@ const I=[
  {id:'privacy',w:3,p:[/privacy|my data|store|saved|cookies|login|account/,/ความเป็นส่วนตัว|เก็บข้อมูล|บัญชี|ล็อกอิน|คุกกี้/],a:L=>({t:q('There is no account or login. Your settings, watchlist, background picture and songs stay in your own browser. The app only requests public data from the Qubic RPC, CoinGecko and exchange APIs.','ไม่มีบัญชีหรือการล็อกอิน การตั้งค่า รายการติดตาม ภาพพื้นหลัง และเพลง เก็บอยู่ในเบราว์เซอร์ของคุณเอง แอปขอเฉพาะข้อมูลสาธารณะจาก Qubic RPC, CoinGecko และ API ของตลาด',L)})},
  {id:'contact',w:3,p:[/contact|creator|who (made|built|created)|developer|owner/,/ผู้สร้าง|ใครทำ|ใครสร้าง|ติดต่อ|เจ้าของ/],a:L=>({t:q('SUOMSIANG CRYPTO made this app. You can reach us on X.','SUOMSIANG CRYPTO เป็นผู้สร้างแอปนี้ ติดต่อเราได้บน X',L),b:[U('@suomsiangcrypto','@suomsiangcrypto','https://x.com/suomsiangcrypto')]})},
  {id:'bpp',w:4,p:[/\bbpp|colony|bitcoin|\bbtc\b|price oracle/,/บีพีพี|โคโลนี|บิตคอยน์|บิทคอยน์|บิทคอย/],a:L=>({t:q("BPP9000 & BTC (report.qubic.tools) is the Qubic Report page \"Colony vs Bitcoin\". Since epoch 240 Qubic's mining is graded on Bitcoin's real hourly direction, stored on-chain by the Price oracle. It shows directions only. It is a research experiment, not investment advice.","BPP9000 & BTC (report.qubic.tools) คือหน้า Qubic Report ชื่อ \"Colony vs Bitcoin\" ตั้งแต่ epoch 240 การขุดของ Qubic ถูกให้คะแนนจากทิศทางราคา Bitcoin รายชั่วโมงจริงที่ Price oracle เก็บไว้บนเชน แสดงเฉพาะทิศทาง เป็นการทดลองวิจัย ไม่ใช่คำแนะนำการลงทุน",L),b:[U('BPP9000 & BTC','BPP9000 & BTC','https://report.qubic.tools/dashboard/btc.html')]})},
- {id:'install',w:4,p:[/install|download.*(app|pc|computer|desktop|laptop)|add to home|\bpwa\b|desktop app/,/ติดตั้ง|ดาวน์โหลด.*(แอป|แอพ|คอม|พีซี|pc)|ลงแอป|ลงคอม|โหลดแอป/],a:L=>({t:q("You can install SUOMSIANG CRYPTO as an app on your PC or phone. In Chrome or Edge, click the Install icon at the right end of the address bar (or the Install button in the header). On iPhone or iPad tap Share, then Add to Home Screen. It opens in its own window, but live data still needs the internet.","คุณติดตั้ง SUOMSIANG CRYPTO เป็นแอปบนคอมหรือมือถือได้ ใน Chrome หรือ Edge ให้กดไอคอนติดตั้งที่ปลายขวาของช่องที่อยู่เว็บ (หรือปุ่มติดตั้งที่หัวเว็บ) บน iPhone/iPad ให้กดแชร์แล้วเลือกเพิ่มลงในหน้าจอโฮม แอปจะเปิดในหน้าต่างของตัวเอง แต่ข้อมูลสดยังต้องใช้อินเทอร์เน็ต",L)})},
  {id:'help',w:2,p:[/help|what can you|how do i use|menu|guide|options/,/ช่วย|ทำอะไรได้|ถามอะไร|วิธีใช้|คำสั่ง/],a:L=>({t:q('I can tell you: the live QU price, market cap, supply and burned QU, the epoch and tick, how the chart and markets work, how to search addresses, the partner links, how to play the games, and how to change colors, background and language. Just ask!','ผมบอกได้เรื่อง: ราคา QU สด มูลค่าตลาด ปริมาณเหรียญและ QU ที่ถูกเผา Epoch และ Tick วิธีใช้กราฟและตลาด วิธีค้นหาที่อยู่ ลิงก์พันธมิตร วิธีเล่นเกม และวิธีเปลี่ยนสี พื้นหลัง และภาษา ถามได้เลย!',L)})}];
 const FALL=L=>({t:q('I am not sure about that one. I can help with live Qubic data, the chart and markets, searching addresses, partners, the games, the music player, colors and background. Try "What is the QU price?"','เรื่องนี้ผมยังไม่แน่ใจ ผมช่วยได้เรื่องข้อมูล Qubic สด กราฟและตลาด การค้นหาที่อยู่ พันธมิตร เกม เครื่องเล่นเพลง สี และพื้นหลัง ลองถามว่า "ราคา QU เท่าไหร่"',L)});
 /* ---- extra languages: fr es zh ja ko vi id ru ---- */
@@ -1719,16 +1710,6 @@ TX.vi.bpp="BPP9000 & BTC (report.qubic.tools) là trang \"Colony vs Bitcoin\" c�
 TX.id.bpp="BPP9000 & BTC (report.qubic.tools) adalah halaman \"Colony vs Bitcoin\" dari Qubic Report. Sejak epoch 240, penambangan Qubic dinilai dari arah harga Bitcoin per jam yang sebenarnya, yang disimpan on-chain oleh oracle harga. Hanya arah; ini eksperimen riset, bukan saran investasi.";
 TX.ru.bpp="BPP9000 & BTC (report.qubic.tools) — страница «Colony vs Bitcoin» из Qubic Report. Начиная с epoch 240 майнинг Qubic оценивается по реальному почасовому направлению цены Bitcoin, которое ончейн хранит ценовой оракул. Только направления; это исследовательский эксперимент, а не инвестиционный совет.";
 TX.ar.bpp="BPP9000 & BTC (report.qubic.tools) هي صفحة «Colony vs Bitcoin» من Qubic Report. منذ epoch 240 يُقيَّم تعدين Qubic وفق الاتجاه الفعلي لسعر Bitcoin كل ساعة، ويخزّنه أوراكل الأسعار على السلسلة. الاتجاهات فقط؛ هذه تجربة بحثية وليست نصيحة استثمارية.";
-X.install=/installer|télécharger|instalar|descargar|安装|下载|インストール|ダウンロード|설치|다운로드|cài đặt|tải về|\bcài\b|\binstal\b|pasang|unduh|установ|скачать/;XA.install=/ثبت|تنزيل|تحميل التطبيق|حمل التطبيق/;
-TX.fr.install="Vous pouvez installer SUOMSIANG CRYPTO comme une application sur votre PC ou votre téléphone. Dans Chrome ou Edge, cliquez sur l'icône Installer à droite de la barre d'adresse (ou sur le bouton Installer de l'en-tête). Sur iPhone ou iPad, appuyez sur Partager puis sur Sur l'écran d'accueil. Elle s'ouvre dans sa propre fenêtre, mais les données en direct nécessitent Internet.";
-TX.es.install="Puedes instalar SUOMSIANG CRYPTO como aplicación en tu PC o móvil. En Chrome o Edge, haz clic en el icono Instalar al final de la barra de direcciones (o en el botón Instalar de la cabecera). En iPhone o iPad pulsa Compartir y luego Añadir a pantalla de inicio. Se abre en su propia ventana, pero los datos en vivo necesitan Internet.";
-TX.zh.install="你可以把 SUOMSIANG CRYPTO 安装成电脑或手机上的应用。在 Chrome 或 Edge 中，点击地址栏右端的“安装”图标（或页眉的“安装”按钮）。在 iPhone 或 iPad 上，点“分享”，再选“添加到主屏幕”。它会在独立窗口中打开，但实时数据仍需联网。";
-TX.ja.install="SUOMSIANG CRYPTOはPCやスマホにアプリとしてインストールできます。ChromeやEdgeでは、アドレスバー右端の「インストール」アイコン（またはヘッダーのインストールボタン）をクリックします。iPhoneやiPadでは共有から「ホーム画面に追加」を選びます。専用ウィンドウで開きますが、ライブデータにはインターネット接続が必要です。";
-TX.ko.install="SUOMSIANG CRYPTO를 PC나 휴대폰에 앱으로 설치할 수 있습니다. Chrome이나 Edge에서는 주소창 오른쪽 끝의 '설치' 아이콘(또는 헤더의 설치 버튼)을 클릭하세요. iPhone이나 iPad에서는 공유를 누른 뒤 '홈 화면에 추가'를 선택하세요. 별도 창으로 열리지만 실시간 데이터는 인터넷이 필요합니다.";
-TX.vi.install="Bạn có thể cài SUOMSIANG CRYPTO thành ứng dụng trên máy tính hoặc điện thoại. Trong Chrome hoặc Edge, bấm biểu tượng Cài đặt ở cuối thanh địa chỉ (hoặc nút Cài đặt ở đầu trang). Trên iPhone hoặc iPad, chạm Chia sẻ rồi Thêm vào Màn hình chính. Ứng dụng mở trong cửa sổ riêng, nhưng dữ liệu trực tiếp vẫn cần Internet.";
-TX.id.install="Anda bisa memasang SUOMSIANG CRYPTO sebagai aplikasi di PC atau ponsel. Di Chrome atau Edge, klik ikon Instal di ujung kanan bilah alamat (atau tombol Instal di header). Di iPhone atau iPad ketuk Bagikan lalu Tambah ke Layar Utama. Aplikasi terbuka di jendela sendiri, tetapi data langsung tetap butuh internet.";
-TX.ru.install="SUOMSIANG CRYPTO можно установить как приложение на компьютер или телефон. В Chrome или Edge нажмите значок «Установить» в правой части адресной строки (или кнопку «Установить» в шапке). На iPhone или iPad нажмите «Поделиться», затем «На экран Домой». Оно открывается в отдельном окне, но для живых данных нужен интернет.";
-TX.ar.install="يمكنك تثبيت SUOMSIANG CRYPTO كتطبيق على الكمبيوتر أو الهاتف. في Chrome أو Edge انقر على أيقونة التثبيت في أقصى يمين شريط العنوان (أو زر التثبيت في الشريط العلوي). على iPhone أو iPad اضغط مشاركة ثم إضافة إلى الشاشة الرئيسية. يُفتح في نافذته الخاصة، لكن البيانات المباشرة تحتاج إلى الإنترنت.";
 I.forEach(it=>{it.x=X[it.id];it.xa=XA[it.id]});
 const LW={
  fr:"jeux il elle confidentialité aide minage graphique portefeuille bougie suivre partenaire explorateur rechercher chercher qualité capitalisation brûlés langue couleur thème musique billard église actifs le la les un une des du est sont quel quelle quels quelles comment où ou et je tu vous nous pour avec sur dans prix combien acheter vendre bonjour salut merci cours jeu jouer fonctionne peux peut puis c'est qu'est-ce que qui quoi pourquoi donne montre moi mon ma mes ce cette ces au aux pas très bien site application graphique marché marchés".split(' '),
@@ -1782,17 +1763,6 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&isOpen&&!HELP.isOpe
 try{if(!localStorage.getItem('suomsiang_as_seen'))setTimeout(()=>{if(!isOpen){tip.classList.add('show');setTimeout(()=>tip.classList.remove('show'),9000)}},2500)}catch(e){}
 Object.assign(D,{"Qubic Report: Colony vs Bitcoin (BPP-9000 live)":"Qubic Report: Colony vs Bitcoin (BPP-9000 สด)","Quick links":"ลิงก์ด่วน","Ask Suomsiang":"ถาม Suomsiang","Suomsiang assistant":"ผู้ช่วย Suomsiang","Your guide to this app":"ผู้ช่วยนำทางของแอปนี้","Ask me anything about this app...":"ถามเรื่องในแอปนี้ได้เลย...","Send":"ส่ง","Built-in helper: it answers from this app's data and features. Not financial advice.":"ผู้ช่วยในตัว ตอบจากข้อมูลและฟีเจอร์ของแอปนี้ ไม่ใช่คำแนะนำทางการเงิน","What is the QU price?":"ราคา QU ตอนนี้เท่าไหร่?","What is Qubic?":"Qubic คืออะไร?","Where can I buy QU?":"ซื้อ QU ได้ที่ไหน?","How do I play snooker?":"เล่นสนุกเกอร์ยังไง?","How do I change the background?":"เปลี่ยนภาพพื้นหลังยังไง?","Hi! I'm Suomsiang, your guide to this app. Ask me about live Qubic data, the chart, markets, games, or how anything works. I reply in the language you type.":"สวัสดีครับ ผมชื่อ Suomsiang ผู้ช่วยนำทางของแอปนี้ ถามเรื่องข้อมูล Qubic สด กราฟ ตลาด เกม หรือวิธีใช้ส่วนต่าง ๆ ได้เลย ผมตอบตามภาษาที่คุณพิมพ์"});
 return{ask,open,close,match,detect,get isOpen(){return isOpen}}})();
-
-
-/* ===== Install as an app (PWA): header button + service worker ===== */
-(()=>{let dp=null;const b=$('instBtn'),root=document.documentElement,standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true,ios=/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.MSStream;
-  const show=v=>{b.hidden=!v;root.classList.toggle('can-install',v)};
-  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;if(!standalone())show(true)});
-  window.addEventListener('appinstalled',()=>{dp=null;show(false);toast(T('App installed'))});
-  if(ios&&!standalone())show(true);
-  b.onclick=async()=>{if(dp){dp.prompt();try{await dp.userChoice}catch(e){}dp=null;show(false)}else toast(T('To install on iPhone or iPad: tap Share, then Add to Home Screen'),6)};
-  if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})});
-  Object.assign(D,{"Install":"ติดตั้ง","Install app":"ติดตั้งแอป","App installed":"ติดตั้งแอปแล้ว","To install on iPhone or iPad: tap Share, then Add to Home Screen":"ติดตั้งบน iPhone/iPad: กดแชร์ แล้วเลือกเพิ่มลงในหน้าจอโฮม"})})();
 
 /* boot */
 applyLang();
