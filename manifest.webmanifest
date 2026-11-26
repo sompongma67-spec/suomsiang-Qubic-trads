@@ -26,5 +26,13 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "id": "./",
+  "lang": "en",
+  "categories": [
+    "finance",
+    "utilities"
+  ],
+  "orientation": "any",
+  "prefer_related_applications": false
 }
