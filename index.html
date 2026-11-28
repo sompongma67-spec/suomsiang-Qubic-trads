@@ -586,6 +586,7 @@ footer{padding-right:96px}
 
 </script>
 <script>
+(()=>{
 const RPC = (window.SUOMSIANG_RPC || 'https://rpc.qubic.org');
 const $ = id => document.getElementById(id);
 const nf = n => (n === null || n === undefined || n === '') ? '--' : Number(n).toLocaleString('en-US');
@@ -2201,6 +2202,8 @@ let INST;try{INST=(()=>{let dp=null;const b=$('instBtn'),root=document.documentE
 applyLang();
 const h=location.hash.slice(1);if(h&&document.getElementById(h))go(h);
 loadTick();loadStats();setInterval(loadTick,5000);setInterval(loadStats,60000);
+window.go=go;window.__PK=PK;
+})();
 </script>
 </body>
 </html>
