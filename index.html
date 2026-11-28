@@ -243,6 +243,73 @@ tr.own td{background:color-mix(in srgb,var(--ac1) 10%,transparent)}
 .htbox ul{margin:0;padding-left:18px;color:var(--tx2);line-height:1.55;font-size:.92rem}.htbox li{margin:3px 0}.htbox li b{color:var(--tx)}.htbox .btn{margin-top:18px}
 @media(max-width:560px){#gm .gmbar{gap:6px;right:8px}#gm .gmbar .btn{padding:6px 10px;font-size:.74rem}}
 @media(prefers-reduced-motion:reduce){.howto,.htbox{transition:none}}
+/* Poker */
+#pickPoker{grid-column:1/-1;order:5}.gphelp[data-help=poker]{grid-column:1/-1;order:6}
+@media(max-width:520px){#pickPoker,.gphelp[data-help=poker]{grid-column:auto}}
+.pk{background:radial-gradient(ellipse at 50% 25%,#1d0c17,#05020a 72%)}
+.pkwrap{position:absolute;inset:0;display:flex;flex-direction:column;gap:8px;padding:calc(10px + env(safe-area-inset-top)) 12px calc(10px + env(safe-area-inset-bottom));max-width:1200px;margin:0 auto}
+.pktop{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.pkinfo{display:grid;gap:2px}.pkinfo b{font-size:1.05rem}.pkinfo span{color:var(--tx2);font-size:.8rem}
+.pkbar{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.pkbar .btn{padding:7px 12px;font-size:.78rem}
+.pkarea{position:relative;flex:1 1 auto;min-height:250px}
+.pkfelt{position:absolute;inset:7% 3% 14% 3%;border-radius:50%/46%;background:radial-gradient(ellipse at 50% 38%,#148050 0,#0b4f2e 62%,#06301d);border:11px solid #3b1e13;box-shadow:inset 0 0 70px rgba(0,0,0,.55),0 24px 60px rgba(0,0,0,.6),0 0 0 2px color-mix(in srgb,var(--ac1) 38%,transparent)}
+.pkcenter{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);display:grid;gap:10px;justify-items:center;width:min(92%,640px);z-index:1}
+.pkpot{font:800 .9rem var(--mono);color:#ffd36b;background:rgba(0,0,0,.5);padding:4px 16px;border-radius:999px;border:1px solid rgba(255,211,107,.4)}
+.pkboard{display:flex;gap:clamp(4px,.9vw,10px)}
+.pkboard .pkc{--cw:clamp(36px,5.2vw,68px)}
+.pks{position:absolute;transform:translate(-50%,-50%);--sw:clamp(96px,14vw,150px);width:var(--sw);left:clamp(calc(var(--sw)/2 + 6px),var(--x,50%),calc(100% - var(--sw)/2 - 6px));display:grid;gap:3px;justify-items:center;text-align:center;z-index:2;transition:opacity .3s,filter .3s}
+.pks.me{transform:translate(-50%,-100%)}
+.pks.out{opacity:.28;filter:grayscale(1)}.pks.fold{opacity:.5}
+.pkcards{display:flex;gap:3px;min-height:calc(var(--cw,32px)*1.42)}
+.pks .pkc{--cw:clamp(26px,3.3vw,44px)}.pks.me .pkc{--cw:clamp(44px,6vw,74px)}
+.pks.me .pkcards{gap:6px}
+.pkc{width:var(--cw);height:calc(var(--cw)*1.42);border-radius:calc(var(--cw)*.14);background:#fff;color:#16121a;position:relative;box-shadow:0 3px 9px rgba(0,0,0,.55);font-family:'Manrope',sans-serif;font-weight:800;user-select:none;flex:none}
+.pkc.red{color:#d4202a}
+.pkc .r{position:absolute;left:11%;top:5%;font-size:calc(var(--cw)*.4);line-height:1}
+.pkc .s{position:absolute;left:12%;top:calc(var(--cw)*.46);font-size:calc(var(--cw)*.3);line-height:1}
+.pkc .big{position:absolute;right:9%;bottom:5%;font-size:calc(var(--cw)*.64);line-height:1}
+.pkc.back{background:repeating-linear-gradient(45deg,var(--ac1) 0 5px,#5a1038 5px 10px);border:2px solid #fff}
+.pkc.empty{background:rgba(255,255,255,.05);box-shadow:none;border:1px dashed rgba(255,255,255,.2)}
+.pkc.deal{animation:pkdeal .38s cubic-bezier(.2,.8,.2,1)}.pkc.flip{animation:pkflip .4s ease}
+@keyframes pkdeal{from{transform:translateY(-34px) scale(.6) rotate(-14deg);opacity:0}}
+@keyframes pkflip{from{transform:rotateY(90deg)}}
+.pkpl{position:relative;display:flex;align-items:center;gap:6px;max-width:100%;padding:4px 10px 4px 4px;border-radius:999px;background:rgba(12,4,14,.88);border:1px solid var(--bd);backdrop-filter:blur(4px);transition:box-shadow .2s,border-color .2s}
+.pks.turn .pkpl{border-color:var(--ac1);box-shadow:0 0 0 2px var(--ac1),0 0 24px color-mix(in srgb,var(--ac1) 65%,transparent)}
+.pks.won .pkpl{border-color:#ffd36b;box-shadow:0 0 0 2px #ffd36b,0 0 26px rgba(255,211,107,.6)}
+.pkav{width:clamp(28px,3.4vw,38px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-size:clamp(15px,2vw,22px);background:linear-gradient(135deg,var(--ac1),var(--ac2));flex:none}
+.pkmeta{display:grid;text-align:left;line-height:1.15;min-width:0}
+.pkname{font-size:.74rem;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pkchips{font:700 .76rem var(--mono);color:#ffd36b}
+.pkbtn{position:absolute;right:-7px;top:-7px;width:20px;height:20px;border-radius:50%;background:#fff;color:#111;font:800 .68rem var(--mono);font-style:normal;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.5)}.pkbtn[hidden]{display:none}
+.pkst{font-size:.7rem;font-weight:800;padding:1px 9px;border-radius:999px;background:rgba(0,0,0,.6);color:#fff}.pkst:empty{display:none}
+.pkst.fold{color:#aaa}.pkst.win{background:linear-gradient(135deg,#ffd36b,#ff9ad5);color:#2b0518}
+.pkdesc{font-size:.68rem;font-weight:700;color:#ffe9a8;text-shadow:0 1px 3px #000}.pkdesc:empty{display:none}
+.pkbet{font:800 .72rem var(--mono);color:#fff;background:rgba(0,0,0,.55);border:1px solid #ffd36b;padding:1px 9px;border-radius:999px}.pkbet:empty{display:none}
+.pkact{display:grid;gap:8px;padding:10px 12px;border-radius:18px;background:rgba(12,4,14,.86);border:1px solid var(--bd);backdrop-filter:blur(8px)}
+.pkmsg{text-align:center;color:var(--tx);font-size:.88rem;font-weight:700;min-height:1.3em}
+.pkrow{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap}.pkrow[hidden]{display:none}
+.pkact.off #pkRow{opacity:.4;pointer-events:none}
+.pkb{min-width:104px;padding:12px 16px;font-size:.92rem}.pkb.fold{border-color:var(--rd);color:var(--rd)}
+.pkraise{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}.pkraise[hidden]{display:none}
+.pkqs{display:flex;gap:4px}.pkqs button{border:1px solid var(--bd);background:var(--glass);color:var(--tx);font:700 .74rem 'Manrope','Noto Sans Thai',sans-serif;padding:7px 10px;border-radius:999px;cursor:pointer}
+.pkqs button:hover{border-color:var(--ac1)}
+.pkslr{display:flex;gap:8px;align-items:center}.pkslr input[type=range]{width:min(240px,34vw);accent-color:var(--ac1)}
+.pkslr input[type=number]{width:88px;background:var(--glass);border:1px solid var(--bd);color:var(--tx);border-radius:10px;padding:8px;font:700 .88rem var(--mono)}
+#pkNext{justify-self:center;padding:13px 34px;font-size:.98rem}#pkNext[hidden]{display:none}
+.pkov{position:absolute;inset:0;z-index:5;display:grid;place-items:center;padding:16px;background:rgba(4,1,8,.8);backdrop-filter:blur(8px)}.pkov[hidden]{display:none}
+.pkbox{width:min(520px,100%);padding:24px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015)),var(--card-solid,var(--card));border:1px solid color-mix(in srgb,var(--ac1) 40%,var(--bd));box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px color-mix(in srgb,var(--ac1) 18%,transparent);display:grid;gap:12px;text-align:center}
+.pkbox h2{margin:0}.pkbox p{margin:0}.pkq{font-weight:800}.pkhint{color:var(--tx2);font-size:.82rem}
+.pkopp,.pkrow2{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+@media(max-width:700px){
+  .pkbar .btn{padding:6px 9px;font-size:.72rem}.pkb{min-width:84px;padding:11px 12px}
+  .pks{--sw:clamp(84px,24vw,116px)}.pkpl{padding-right:7px}.pkname{font-size:.68rem}.pkchips{font-size:.7rem}
+  .pks .pkc{--cw:clamp(22px,6vw,32px)}.pks.me .pkc{--cw:clamp(40px,11vw,56px)}.pkboard .pkc{--cw:clamp(32px,9.4vw,50px)}
+  .pkfelt{inset:6% 1% 16% 1%;border-width:8px}.pkcenter{top:44%}
+  .pkslr input[type=range]{width:34vw}.pkqs button{padding:6px 8px;font-size:.7rem}
+}
+@media(prefers-reduced-motion:reduce){.pkc.deal,.pkc.flip{animation:none}}
+
+.instlist{list-style:none;padding:0;margin:6px 0 0}.instlist li{display:flex;gap:8px;align-items:center;padding:3px 0;color:var(--tx2);font-size:.9rem}.instlist b.ok{color:var(--gr)}.instlist b.no{color:var(--rd)}.instlist code{color:var(--tx);font-size:.84rem}
 #bgimg{position:fixed;inset:0;z-index:0;display:none;background-size:cover;background-position:center;background-repeat:no-repeat;pointer-events:none;transition:opacity .25s}
 #bgimg.on{display:block}#bgimg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}#bgimg.vid video{display:block}.bgbtns{flex-wrap:wrap}.bgbtns [hidden]{display:none}
 html.glass .card,html.glass .mkcard,html.glass .chartwrap{backdrop-filter:blur(12px) saturate(1.15);-webkit-backdrop-filter:blur(12px) saturate(1.15)}
@@ -306,8 +373,8 @@ footer{padding-right:96px}
   </nav>
   <div class="lang" role="group" aria-label="Language"><button data-l="th" aria-pressed="false">TH</button><button data-l="en" aria-pressed="false">ENG</button></div>
   <span class="sp"></span>
-  <div class="strip"><span><i class="dot" id="live" data-live></i>Epoch <b id="hEpoch">--</b></span><span>Tick <b id="hTick">--</b></span></div>
-  <button class="btn pri inst" id="instBtn" type="button" hidden title="Install app"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg><span>Install</span></button><span class="livemini" aria-hidden="true"><i class="dot" data-live></i></span><button class="btn" id="colorBtn" aria-expanded="false">Colors</button><button class="btn" id="theme" aria-label="Toggle light or dark">Light/Dark</button>
+  <button class="btn pri inst" id="instBtn" type="button" title="Install app on your PC"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg><span>Install app</span></button><div class="strip"><span><i class="dot" id="live" data-live></i>Epoch <b id="hEpoch">--</b></span><span>Tick <b id="hTick">--</b></span></div>
+  <span class="livemini" aria-hidden="true"><i class="dot" data-live></i></span><button class="btn" id="colorBtn" aria-expanded="false">Colors</button><button class="btn" id="theme" aria-label="Toggle light or dark">Light/Dark</button>
 </header>
 <main>
 <section id="overview" class="on">
@@ -404,6 +471,10 @@ footer{padding-right:96px}
         <svg viewBox="0 0 120 90" aria-hidden="true"><rect x="4" y="12" width="112" height="66" rx="10" fill="#0f7a42" stroke="#6b3a1e" stroke-width="6"/><circle cx="30" cy="45" r="8" fill="#f6f3e8"/><circle cx="70" cy="45" r="7" fill="#d4202a"/><circle cx="84" cy="38" r="7" fill="#d4202a"/><circle cx="84" cy="52" r="7" fill="#d4202a"/><circle cx="98" cy="45" r="7" fill="#1a1a1f"/><circle cx="14" cy="20" r="6" fill="#000"/></svg>
         <b>Snooker</b><span>Play snooker against the computer or a friend.</span></button>
       <button class="btn gphelp" data-help="snooker" type="button">How to play</button>
+      <button class="gpcard" id="pickPoker" type="button">
+        <svg viewBox="0 0 120 90" aria-hidden="true"><rect x="4" y="8" width="112" height="74" rx="12" fill="#0f7a42" stroke="#6b3a1e" stroke-width="5"/><g transform="rotate(-12 48 46)"><rect x="30" y="20" width="34" height="48" rx="5" fill="#fff"/><text x="36" y="37" font-size="14" font-weight="800" fill="#16121a" font-family="sans-serif">A</text><text x="38" y="60" font-size="20" fill="#16121a">&#9824;</text></g><g transform="rotate(10 78 46)"><rect x="58" y="22" width="34" height="48" rx="5" fill="#fff"/><text x="64" y="39" font-size="14" font-weight="800" fill="#d4202a" font-family="sans-serif">K</text><text x="66" y="62" font-size="20" fill="#d4202a">&#9829;</text></g><circle cx="100" cy="66" r="9" fill="var(--ac1)" stroke="#fff" stroke-width="2" stroke-dasharray="4 3"/></svg>
+        <b>Texas Hold'em Poker</b><span>Poker against the computer. Win all the chips!</span></button>
+      <button class="btn gphelp" data-help="poker" type="button">How to play</button>
     </div>
     <button class="btn" id="gpClose" type="button">Close</button>
   </div>
@@ -415,6 +486,32 @@ footer{padding-right:96px}
 <div id="gm" class="gm" role="dialog" aria-modal="true" aria-label="Cube Blaster game" aria-hidden="true" inert>
   <canvas id="gcv" tabindex="0" aria-label="Cube Blaster game"></canvas>
   <div class="gmbar"><button class="btn" id="gmMute" aria-pressed="true">Sound on</button><button class="btn" id="gmHelp" type="button">How to play</button><button class="btn" id="gmClose">Close game</button></div>
+</div>
+<div id="pk" class="gm pk" role="dialog" aria-modal="true" aria-label="Texas Hold'em Poker" aria-hidden="true" inert>
+  <div class="pkwrap">
+    <div class="pktop">
+      <div class="pkinfo"><b id="pkHand">Hand 1</b><span id="pkBlinds">Blinds 10/20</span></div>
+      <div class="pkbar"><button class="btn" id="pkOdds" aria-pressed="false" type="button">Odds off</button><button class="btn" id="pkMute" aria-pressed="true" type="button">Sound on</button><button class="btn" id="pkNew" type="button">New game</button><button class="btn" id="pkHelp" type="button">How to play</button><button class="btn" id="pkClose" type="button">Close poker</button></div>
+    </div>
+    <div class="pkarea">
+      <div class="pkfelt" aria-hidden="true"></div>
+      <div class="pkcenter"><div class="pkpot" id="pkPot">Pot 0</div><div class="pkboard" id="pkBoard" aria-label="Community cards"><span class="pkc empty"></span><span class="pkc empty"></span><span class="pkc empty"></span><span class="pkc empty"></span><span class="pkc empty"></span></div></div>
+      <div id="pkSeats"></div>
+    </div>
+    <div class="pkact off" id="pkAct">
+      <div class="pkmsg" id="pkMsg" role="status" aria-live="polite"></div>
+      <div class="pkrow" id="pkRow">
+        <button class="btn pkb fold" id="pkFold" type="button">Fold</button>
+        <button class="btn pkb" id="pkCall" type="button">Check</button>
+        <div class="pkraise" id="pkRbox"><div class="pkqs" id="pkQuick"><button type="button" data-q="min">Min</button><button type="button" data-q="half">½ pot</button><button type="button" data-q="pot">Pot</button><button type="button" data-q="all">All-in</button></div><div class="pkslr"><input type="range" id="pkSl" aria-label="Raise amount" min="0" max="100" value="0"><input type="number" id="pkAmt" aria-label="Raise to" inputmode="numeric"></div><button class="btn pri pkb" id="pkRaise" type="button">Raise</button></div>
+      </div>
+      <button class="btn pri" id="pkNext" type="button" hidden>Next hand</button>
+    </div>
+  </div>
+  <div class="pkov" id="pkOv" hidden></div>
+</div>
+<div id="instInfo" class="howto" role="dialog" aria-modal="true" aria-labelledby="instT" aria-hidden="true" inert>
+  <div class="htbox"><h2 id="instT">Install on your PC</h2><div id="instBody"></div><button class="btn pri" id="instOk" type="button">Got it</button></div>
 </div>
 <div id="fs" class="fs" role="dialog" aria-modal="true" aria-labelledby="fsT" aria-hidden="true" inert>
   <div class="fsin">
@@ -559,7 +656,7 @@ function applyLang(){document.documentElement.lang=LANG;walkLang(document.body);
   document.title=LANG==='th'?'SUOMSIANG CRYPTO | ข้อมูล Qubic แบบสด':'SUOMSIANG CRYPTO | Qubic Live Data';
   const md=document.querySelector('meta[name=description]');if(md)md.content=LANG==='th'?'SUOMSIANG CRYPTO: สถิติเครือข่าย Qubic แบบสด ค้นหาข้อมูล Computor สินทรัพย์ และการเทรด QubicSwap โดยข้อมูลมาจาก Qubic RPC ทางการ':'SUOMSIANG CRYPTO: live Qubic network stats, explorer, computors, assets and QubicSwap trading, with data from the official Qubic RPC.';
   $('bRep').textContent=T(['Repeat: off','Repeat: all','Repeat: one'][rep]);$('bPlay').textContent=media.paused?T('Play'):T('Pause');if(idx<0)$('pTitle').textContent=T('No track loaded');if(typeof fsRefresh==='function')fsRefresh()}
-document.querySelector('.lang').addEventListener('click',e=>{const l=e.target.dataset.l;if(!l||l===LANG)return;LANG=l;try{localStorage.setItem('suomsiang_lang',l)}catch(er){}applyLang();loadTick();loadStats();renderList();if($('watch').classList.contains('on'))renderWatch();if(comps.length)drawComps();});
+document.querySelector('.lang').addEventListener('click',e=>{const l=e.target.dataset.l;if(!l||l===LANG)return;LANG=l;try{localStorage.setItem('suomsiang_lang',l)}catch(er){}applyLang();if(typeof PK!=='undefined'){PK.relang();if(typeof INST!=='undefined')INST.relang()}loadTick();loadStats();renderList();if($('watch').classList.contains('on'))renderWatch();if(comps.length)drawComps();});
 
 /* overview */
 let lastOk=0;
@@ -1097,11 +1194,273 @@ $('snClose').onclick=closeS;$('snMenu').onclick=()=>{if(open){st='menu';rack()}}
 Object.assign(D,{"Snooker":"สนุกเกอร์","Close snooker":"ปิดเกม","Menu":"เมนู","1 Player vs Computer":"1 ผู้เล่น สู้กับคอมพิวเตอร์","2 Players":"2 ผู้เล่น","Pot the reds, then a color. Highest score wins the frame.":"ลงลูกแดงแล้วตามด้วยลูกสี คะแนนสูงสุดชนะเฟรม","Best vs Computer":"สถิติสูงสุดเมื่อเจอคอมพิวเตอร์","You":"คุณ","Computer":"คอมพิวเตอร์","Player":"ผู้เล่น","Break":"เบรก","Reds":"ลูกแดงเหลือ","Next":"ต่อไป","Next: Red":"ต่อไป: ลูกแดง","Next: any color":"ต่อไป: ลูกสีใดก็ได้","Red":"แดง","Yellow":"เหลือง","Green":"เขียว","Brown":"น้ำตาล","Blue":"น้ำเงิน","Pink":"ชมพู","Black":"ดำ","Foul!":"ฟาวล์!","points to":"คะแนนให้","Cue ball potted":"ลงลูกขาว","No ball hit":"ไม่โดนลูกใดเลย","Wrong ball hit first":"โดนลูกผิดก่อน","Wrong ball potted":"ลงลูกผิด","Computer is thinking...":"คอมพิวเตอร์กำลังคิด...","Draw":"เสมอ","wins!":"ชนะ!","Play again":"เล่นอีกครั้ง","Drag the cue ball inside the D, then aim and shoot":"ลากลูกขาวในครึ่งวงกลม D แล้วเล็งและยิง","Aim with the mouse or finger. Drag the bar to set power, release to shoot.":"เล็งด้วยเมาส์หรือนิ้ว ลากแถบเพื่อกำหนดแรง ปล่อยเพื่อยิง"});
 return{open:openS,close:closeS,get st(){return st},get balls(){return balls},get score(){return score},get cur(){return cur},get phase(){return phase},get mode(){return mode},get open_(){return open},newGame,fire:(a,p)=>{aim=a;fire(a,p)},resolve,set cur(v){cur=v},set phase(v){phase=v},aimSet:a=>{aim=a}}})();
 
+/* ===== Texas Hold'em poker (play chips only, CPU opponents) ===== */
+const PK=(()=>{
+const el=$('pk'),Q=s=>el.querySelector(s);
+const SU=['♠','♥','♦','♣'],RK=['','','2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+const RN=['','','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Jack','Queen','King','Ace'];
+const RP=['','','Twos','Threes','Fours','Fives','Sixes','Sevens','Eights','Nines','Tens','Jacks','Queens','Kings','Aces'];
+const LV=[[10,20],[15,30],[25,50],[50,100],[75,150],[100,200],[150,300],[200,400],[300,600],[400,800],[600,1200],[1000,2000]];
+const BOTS=[{n:'Nok',e:'🦉',tight:.65,aggr:.45,bluff:.12},{n:'Max',e:'🦊',tight:.25,aggr:.8,bluff:.35},{n:'Ploy',e:'🐼',tight:.45,aggr:.2,bluff:.05},{n:'Sora',e:'🐯',tight:.5,aggr:.6,bluff:.2},{n:'Kai',e:'🐺',tight:.35,aggr:.55,bluff:.25}];
+const POS={3:[[50,100],[22,26],[78,26]],4:[[50,100],[8,56],[50,12],[92,56]],5:[[50,100],[8,62],[25,17],[75,17],[92,62]],6:[[50,100],[8,66],[16,20],[50,11],[84,20],[92,66]]};
+const MS={fold:['You fold','{p} folds'],check:['You check','{p} checks'],call:['You call {n}','{p} calls {n}'],bet:['You bet {n}','{p} bets {n}'],raise:['You raise to {n}','{p} raises to {n}'],allin:['You are all-in {n}','{p} is all-in {n}']};
+let G=null,tok=0,wait=null,soundOn=true,oddsOn=false,fast=false,auto=false,ac=null,lastMsg=null,opp=3,best=0,ovMode='';
+try{opp=+localStorage.getItem('suomsiang_pk_opp')||3;best=+localStorage.getItem('suomsiang_pk_best')||0}catch(e){}
+const isOpen=()=>el.classList.contains('open');
+const fmt=n=>Math.round(n).toLocaleString('en-US');
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function later(fn,ms){const t=tok;setTimeout(()=>{if(t!==tok)return;if(!isOpen()){wait=fn;return}fn()},fast?0:ms)}
+function snd(k){if(!soundOn||fast)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime,f={deal:520,chip:880,fold:180,win:660,turn:740}[k]||440;o.type=k==='fold'?'sawtooth':'triangle';o.frequency.setValueAtTime(f,t);if(k==='win')o.frequency.linearRampToValueAtTime(f*1.5,t+.25);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.07,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+(k==='win'?.4:.12));o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.45)}catch(e){}}
+function setMsg(fn){lastMsg=fn;Q('#pkMsg').textContent=fn()}
+function say(p,k,n){setMsg(()=>T(MS[k][p.human?0:1],{p:p.name,n:fmt(n||0)}))}
+
+/* ---- hand evaluation: higher number is a better hand ---- */
+function ev(cs){
+  const rc=new Array(15).fill(0),sc=[0,0,0,0],sm=[0,0,0,0];let m=0;
+  for(let i=0;i<cs.length;i++){const c=cs[i],r=c%13+2,s=(c/13)|0;rc[r]++;sc[s]++;sm[s]|=1<<r;m|=1<<r}
+  const hi=mask=>{const mm=(mask&16384)?(mask|2):mask;for(let h=14;h>=5;h--){const nd=31<<(h-4);if((mm&nd)===nd)return h}return 0};
+  const enc=(c,a)=>{let v=c;for(let i=0;i<5;i++)v=v*15+(a[i]||0);return v};
+  let fs=-1;for(let s=0;s<4;s++)if(sc[s]>=5)fs=s;
+  if(fs>=0){const h=hi(sm[fs]);if(h)return enc(8,[h])}
+  const qd=[],t=[],p=[],o=[];
+  for(let r=14;r>=2;r--){const n=rc[r];if(n===4)qd.push(r);else if(n===3)t.push(r);else if(n===2)p.push(r);else if(n===1)o.push(r)}
+  if(qd.length){const k=[...p,...t,...o].sort((a,b)=>b-a)[0]||0;return enc(7,[qd[0],k])}
+  if(t.length&&(t.length>1||p.length)){const pr=t.length>1?Math.max(t[1],p[0]||0):p[0];return enc(6,[t[0],pr])}
+  if(fs>=0){const a=[];for(let r=14;r>=2&&a.length<5;r--)if(sm[fs]&(1<<r))a.push(r);return enc(5,a)}
+  const sh=hi(m);if(sh)return enc(4,[sh]);
+  if(t.length){return enc(3,[t[0],...[...p,...o].sort((a,b)=>b-a).slice(0,2)])}
+  if(p.length>=2){const k=[...p.slice(2),...o].sort((a,b)=>b-a)[0]||0;return enc(2,[p[0],p[1],k])}
+  if(p.length===1)return enc(1,[p[0],...o.slice(0,3)]);
+  return enc(0,o.slice(0,5))}
+function desc(v){const c=Math.floor(v/759375),k=i=>Math.floor(v/Math.pow(15,4-i))%15,a=k(0),b=k(1),n=x=>T(RN[x]),pl=x=>T(RP[x]);
+  switch(c){case 8:return a===14?T('Royal flush'):T('Straight flush, {r} high',{r:n(a)});
+    case 7:return T('Four {r}',{r:pl(a)});
+    case 6:return T('Full house, {a} full of {b}',{a:pl(a),b:pl(b)});
+    case 5:return T('Flush, {r} high',{r:n(a)});
+    case 4:return T('Straight, {r} high',{r:n(a)});
+    case 3:return T('Three {r}',{r:pl(a)});
+    case 2:return T('Two pair, {a} and {b}',{a:pl(a),b:pl(b)});
+    case 1:return T('Pair of {r}',{r:pl(a)});
+    default:return T('High card {r}',{r:n(a)})}}
+function equity(hole,board,nOpp,trials){
+  const used=new Set(hole.concat(board)),rest=[];for(let c=0;c<52;c++)if(!used.has(c))rest.push(c);
+  const need=5-board.length,k=need+2*nOpp;let win=0;
+  for(let t=0;t<trials;t++){
+    for(let i=0;i<k;i++){const j=i+((Math.random()*(rest.length-i))|0),x=rest[i];rest[i]=rest[j];rest[j]=x}
+    const bd=board.concat(rest.slice(0,need)),me=ev(hole.concat(bd));let better=false,tie=0;
+    for(let o=0;o<nOpp;o++){const s=ev([rest[need+2*o],rest[need+2*o+1]].concat(bd));if(s>me){better=true;break}if(s===me)tie++}
+    if(!better)win+=1/(1+tie)}
+  return win/trials}
+
+/* ---- game flow ---- */
+const canAct=p=>!p.out&&!p.fold&&!p.allin;
+function shuffle(){const d=[...Array(52).keys()];for(let i=51;i>0;i--){const j=(Math.random()*(i+1))|0;[d[i],d[j]]=[d[j],d[i]]}return d}
+function nextAlive(i){const P=G.P,n=P.length;let j=i;do{j=(j+1)%n}while(P[j].out&&j!==i);return j}
+function newGame(n){tok++;wait=null;opp=n;try{localStorage.setItem('suomsiang_pk_opp',String(n))}catch(e){}
+  const P=[{human:true,name:'You',emo:'😎',chips:2000}];for(let i=0;i<n;i++){const b=BOTS[i];P.push({human:false,name:b.n,emo:b.e,chips:2000,bot:b})}
+  P.forEach(p=>{p.hole=[];p.bet=0;p.tot=0;p.fold=false;p.allin=false;p.out=false;p.acted=false;p.st=null;p.res=null;p.shown=false});
+  G={P,btn:(Math.random()*P.length)|0,hand:0,pot:0,street:0,cur:0,curBet:0,minRaise:20,sb:10,bb:20,board:[],deck:[],phase:'',run:false};
+  Q('#pkOv').hidden=true;ovMode='';build();startHand()}
+function build(){const n=G.P.length,pos=POS[n],box=Q('#pkSeats');box.innerHTML='';
+  G.P.forEach((p,i)=>{const s=document.createElement('div');s.className='pks'+(i?'':' me');s.style.setProperty('--x',pos[i][0]+'%');s.style.top=pos[i][1]+'%';
+    s.innerHTML='<div class="pkcards"><span class="pkc empty"></span><span class="pkc empty"></span></div><div class="pkpl"><div class="pkav">'+p.emo+'</div><div class="pkmeta"><b class="pkname"></b><span class="pkchips"></span></div><i class="pkbtn" hidden>D</i></div><div class="pkst"></div><div class="pkdesc"></div><div class="pkbet"></div>';
+    box.appendChild(s);p.el=s});
+  Q('#pkBoard').querySelectorAll('.pkc').forEach(c=>{c.dataset.v='';c.className='pkc empty';c.innerHTML=''})}
+function put(p,a){a=Math.min(a,p.chips);p.chips-=a;p.bet+=a;p.tot+=a;if(p.chips===0)p.allin=true;return a}
+function startHand(){const P=G.P;
+  P.forEach(p=>{if(p.chips<=0)p.out=true});
+  if(P[0].out)return end(false);
+  if(P.filter(p=>!p.out).length===1)return end(true);
+  G.hand++;const lv=Math.min(LV.length-1,Math.floor((G.hand-1)/6)),was=G.sb;G.sb=LV[lv][0];G.bb=LV[lv][1];
+  P.forEach(p=>{p.hole=[];p.bet=0;p.tot=0;p.fold=p.out;p.allin=false;p.acted=false;p.st=null;p.res=null;p.shown=false;p.score=0});
+  G.board=[];G.street=0;G.pot=0;G.run=false;G.deck=shuffle();
+  const alive=P.filter(p=>!p.out).length;G.btn=nextAlive(G.btn);
+  let sbI,bbI;if(alive===2){sbI=G.btn;bbI=nextAlive(sbI)}else{sbI=nextAlive(G.btn);bbI=nextAlive(sbI)}
+  put(P[sbI],G.sb);put(P[bbI],G.bb);G.curBet=Math.max(P[sbI].bet,P[bbI].bet);G.minRaise=G.bb;
+  for(let r=0;r<2;r++)P.forEach(p=>{if(!p.out)p.hole.push(G.deck.pop())});
+  G.cur=nextAlive(bbI);G.phase='bet';Q('#pkNext').hidden=true;Q('#pkRow').hidden=false;
+  if(G.sb!==was&&G.hand>1)setMsg(()=>T('Blinds up to {a}/{b}',{a:G.sb,b:G.bb}));else setMsg(()=>T('New hand. Cards are dealt.'));
+  snd('deal');render();later(loop,fast?0:900)}
+function roundDone(){const live=G.P.filter(p=>!p.out&&!p.fold);if(live.length<=1)return true;
+  const a=live.filter(p=>!p.allin);if(!a.length)return true;
+  if(a.length===1&&a[0].bet>=G.curBet)return true;
+  return a.every(p=>p.acted&&p.bet===G.curBet)}
+function loop(){if(!G||G.phase!=='bet')return;const P=G.P,n=P.length;
+  if(roundDone())return endRound();
+  let g=0;while((!canAct(P[G.cur])||(P[G.cur].acted&&P[G.cur].bet>=G.curBet))&&g++<n)G.cur=(G.cur+1)%n;
+  const p=P[G.cur];render();
+  if(p.human&&!auto){prepAct();return}
+  later(()=>{if(!G||G.phase!=='bet'||G.P[G.cur]!==p)return;const d=decide(p);step(G.cur,d[0],d[1])},P[0].fold||P[0].out?350:650+Math.random()*650)}
+function step(i,type,amt){act(i,type,amt);G.cur=(i+1)%G.P.length;render();later(loop,fast?0:380)}
+function act(i,type,amt){const p=G.P[i];
+  if(type==='raise'){const maxTo=p.bet+p.chips,minTo=Math.min(G.curBet+G.minRaise,maxTo),to=clamp(Math.round(amt),minTo,maxTo);
+    if(to>G.curBet){const had=G.curBet;put(p,to-p.bet);const size=to-had;if(size>=G.minRaise)G.minRaise=size;G.curBet=to;
+      G.P.forEach(o=>{if(o!==p&&canAct(o))o.acted=false});p.acted=true;
+      p.st={k:p.allin?'All-in':(had===0?'Bet':'Raise'),n:to};say(p,p.allin?'allin':(had===0?'bet':'raise'),p.allin?p.bet:to);snd('chip');return}
+    type='call'}
+  if(type==='fold'){p.fold=true;p.acted=true;p.st=null;say(p,'fold');snd('fold');return}
+  const need=Math.min(G.curBet-p.bet,p.chips);put(p,need);p.acted=true;
+  if(need<=0){p.st={k:'Check'};say(p,'check')}else{p.st={k:p.allin?'All-in':'Call',n:p.allin?p.bet:need};say(p,p.allin?'allin':'call',p.allin?p.bet:need);snd('chip')}}
+function decide(p){const P=G.P,live=P.filter(q=>!q.out&&!q.fold),nOpp=live.length-1,toCall=Math.min(G.curBet-p.bet,p.chips),
+  pend=P.reduce((s,q)=>s+q.bet,0),pot=G.pot+pend,b=p.bot||{tight:.5,aggr:.5,bluff:.15};
+  let eq=equity(p.hole,G.board,nOpp,G.street===0?180:240);eq=clamp(eq+(Math.random()-.5)*.08,0,1);
+  const fair=1/(nOpp+1),po=toCall/(pot+toCall||1),stackBB=p.chips/G.bb,r=Math.random(),canR=live.some(q=>q!==p&&!q.allin)&&p.chips>toCall;
+  const mk=f=>{let to=G.curBet+Math.max(G.minRaise,Math.round(f*(pot+toCall)));to=Math.round(to/5)*5;return Math.min(Math.max(to,G.curBet+G.minRaise),p.bet+p.chips)};
+  let d;
+  if(stackBB<12&&eq>fair*1.3&&canR)d=['raise',p.bet+p.chips];
+  else if(toCall===0){
+    const strong=eq>fair*1.55+.05*b.tight,ok=eq>fair*1.15;
+    if(strong&&r<.55+b.aggr*.4)d=['raise',mk(.5+Math.random()*.4)];
+    else if(ok&&r<b.aggr*.45)d=['raise',mk(.4+Math.random()*.3)];
+    else if(!ok&&r<b.bluff*.3&&G.street>0&&nOpp<=2)d=['raise',mk(.5+Math.random()*.3)];
+    else d=['call']}
+  else{
+    const need=po+.02+b.tight*.08,strong=eq>Math.max(fair*1.7,.55);
+    if(strong&&r<.35+b.aggr*.55)d=['raise',mk(.6+Math.random()*.6)];
+    else if(eq>need&&eq>fair*.9){d=(eq>fair*1.4&&r<b.aggr*.25)?['raise',mk(.6+Math.random()*.4)]:['call']}
+    else if(r<b.bluff*.12&&toCall<pot*.5)d=['raise',mk(.8)];
+    else if(toCall<=G.bb&&eq>fair*.7&&r<.5)d=['call'];
+    else d=['fold']}
+  if(d[0]==='raise'&&!canR)d=toCall>0&&eq<po?['fold']:['call'];
+  return d}
+function firstActor(){const P=G.P,n=P.length;let j=G.btn;for(let k=0;k<n;k++){j=(j+1)%n;if(canAct(P[j]))return j}return G.btn}
+function endRound(){const P=G.P;let s=0;P.forEach(p=>{s+=p.bet;p.bet=0});G.pot+=s;G.curBet=0;G.minRaise=G.bb;
+  P.forEach(p=>{p.acted=false;if(canAct(p))p.st=null});
+  const live=P.filter(p=>!p.out&&!p.fold);
+  if(live.length===1)return foldWin(live[0]);
+  if(G.street===3)return showdown();
+  if(live.filter(p=>!p.allin).length<2&&!G.run){G.run=true;live.forEach(p=>p.shown=true);setMsg(()=>T('All-in! Cards are turned up.'));render();return later(nextStreet,1200)}
+  nextStreet()}
+function nextStreet(){if(!G)return;G.street++;G.deck.pop();for(let i=G.street===1?3:1;i>0;i--)G.board.push(G.deck.pop());snd('deal');
+  const live=G.P.filter(p=>!p.out&&!p.fold);
+  if(live.filter(p=>!p.allin).length<2){G.phase='run';render();return later(()=>{G.street===3?showdown():nextStreet()},1200)}
+  G.cur=firstActor();G.phase='bet';
+  setMsg(()=>T(['','Flop','Turn','River'][G.street]));render();later(loop,fast?0:600)}
+function sidePots(){const P=G.P,lv=[...new Set(P.filter(p=>p.tot>0).map(p=>p.tot))].sort((a,b)=>a-b),live=P.filter(p=>!p.out&&!p.fold),pots=[];let prev=0;
+  lv.forEach(L=>{let amt=0;P.forEach(p=>{amt+=Math.max(0,Math.min(p.tot,L)-prev)});let el2=live.filter(p=>p.tot>=L);if(!el2.length)el2=live;if(amt>0)pots.push({amt,el:el2});prev=L});
+  return pots}
+function foldWin(w){w.chips+=G.pot;w.res={n:G.pot};G.phase='over';
+  setMsg(()=>w.human?T('You win {n}. Everyone else folded.',{n:fmt(G.pot)}):T('{p} wins {n}. Everyone else folded.',{p:w.name,n:fmt(G.pot)}));finish(w.human)}
+function showdown(){const P=G.P,live=P.filter(p=>!p.out&&!p.fold);G.phase='over';
+  live.forEach(p=>{p.shown=true;p.score=ev(p.hole.concat(G.board))});
+  const win=new Map();
+  sidePots().forEach(pt=>{let bs=-1;pt.el.forEach(p=>{if(p.score>bs)bs=p.score});
+    const w=pt.el.filter(p=>p.score===bs),sh=Math.floor(pt.amt/w.length);let rem=pt.amt-sh*w.length;
+    w.sort((a,b)=>((P.indexOf(a)-G.btn-1+P.length)%P.length)-((P.indexOf(b)-G.btn-1+P.length)%P.length));
+    w.forEach(p=>{const a=sh+(rem>0?1:0);if(rem>0)rem--;win.set(p,(win.get(p)||0)+a)})});
+  win.forEach((a,p)=>{p.chips+=a;p.res={n:a}});
+  const ws=[...win.keys()];
+  if(ws.length===1){const w=ws[0],a=win.get(w);setMsg(()=>w.human?T('You win {n} with {h}',{n:fmt(a),h:desc(w.score)}):T('{p} wins {n} with {h}',{p:w.name,n:fmt(a),h:desc(w.score)}))}
+  else setMsg(()=>T('Pot shared: {p}',{p:ws.map(w=>w.human?T('You'):w.name).join(', ')}));
+  finish(win.has(P[0]))}
+function finish(meWon){const me=G.P[0];render();
+  if(me.chips>best){best=me.chips;try{localStorage.setItem('suomsiang_pk_best',String(best))}catch(e){}}
+  if(meWon)snd('win');
+  const alive=G.P.filter(p=>p.chips>0);
+  if(me.chips<=0)return later(()=>end(false),1800);
+  if(alive.length===1)return later(()=>end(true),1800);
+  Q('#pkRow').hidden=true;const nx=Q('#pkNext');nx.hidden=false;if(isOpen())nx.focus({preventScroll:true})}
+function end(win){G.phase='done';render();Q('#pkRow').hidden=true;Q('#pkNext').hidden=true;ovEnd(win)}
+
+/* ---- your turn ---- */
+function labels(){const p=G.P[0],toCall=Math.min(G.curBet-p.bet,p.chips);
+  Q('#pkCall').textContent=toCall<=0?T('Check'):(toCall>=p.chips?T('All-in {n}',{n:fmt(p.chips)}):T('Call {n}',{n:fmt(toCall)}));
+  Q('#pkFold').textContent=T('Fold');if(!Q('#pkRbox').hidden)rlabel()}
+function prepAct(){const p=G.P[0],toCall=Math.min(G.curBet-p.bet,p.chips),maxTo=p.bet+p.chips,minTo=Math.min(G.curBet+G.minRaise,maxTo);
+  labels();
+  const canR=p.chips>toCall&&G.P.some(o=>o!==p&&!o.out&&!o.fold&&!o.allin);
+  Q('#pkRbox').hidden=!canR;
+  if(canR){const sl=Q('#pkSl'),am=Q('#pkAmt');sl.min=am.min=minTo;sl.max=am.max=maxTo;sl.value=am.value=minTo;rlabel()}
+  Q('#pkAct').classList.remove('off');snd('turn');
+  const opps=G.P.filter(o=>!o.out&&!o.fold).length-1;
+  setMsg(()=>{let s=T('Your turn')+' · '+desc(ev(p.hole.concat(G.board)));if(oddsOn)s+=' · '+T('Win chance {n}%',{n:Math.round(equity(p.hole,G.board,opps,350)*100)});return s})}
+function rlabel(){const v=+Q('#pkAmt').value,mx=+Q('#pkSl').max;Q('#pkRaise').textContent=v>=mx?T('All-in {n}',{n:fmt(mx)}):(G.curBet===0?T('Bet {n}',{n:fmt(v)}):T('Raise to {n}',{n:fmt(v)}))}
+function mine(){return G&&G.phase==='bet'&&G.cur===0&&!auto&&!Q('#pkAct').classList.contains('off')}
+function humanDo(type,amt){if(!mine())return;Q('#pkAct').classList.add('off');step(0,type,amt)}
+function quick(k){if(!mine())return;const p=G.P[0],toCall=Math.min(G.curBet-p.bet,p.chips),sl=Q('#pkSl'),pot=G.pot+G.P.reduce((s,q)=>s+q.bet,0);
+  let v=k==='min'?+sl.min:k==='all'?+sl.max:G.curBet+Math.round((k==='half'?.5:1)*(pot+toCall));
+  v=clamp(v,+sl.min,+sl.max);if(v<+sl.max)v=Math.round(v/5)*5;v=clamp(v,+sl.min,+sl.max);sl.value=Q('#pkAmt').value=v;rlabel()}
+
+/* ---- drawing ---- */
+function setCard(node,v){const k=String(v),was=node.dataset.v;if(was===k)return;node.dataset.v=k;
+  if(v===''){node.className='pkc empty';node.innerHTML='';return}
+  const fresh=was===undefined||was==='';
+  if(v==='b'){node.className='pkc back'+(fresh?' deal':'');node.innerHTML='';return}
+  const r=v%13+2,s=(v/13)|0;node.className='pkc'+(s===1||s===2?' red':'')+(was==='b'?' flip':(fresh?' deal':''));
+  node.innerHTML='<span class="r">'+RK[r]+'</span><span class="s">'+SU[s]+'</span><span class="big">'+SU[s]+'</span>'}
+function render(){if(!G)return;const P=G.P,pend=P.reduce((s,q)=>s+q.bet,0);
+  Q('#pkHand').textContent=T('Hand {n}',{n:G.hand});Q('#pkBlinds').textContent=T('Blinds {a}/{b}',{a:G.sb,b:G.bb})+' · '+T('Best {n}',{n:fmt(best)});
+  Q('#pkPot').textContent=T('Pot {n}',{n:fmt(G.pot+pend)});
+  Q('#pkBoard').querySelectorAll('.pkc').forEach((c,i)=>setCard(c,G.board[i]!==undefined?G.board[i]:''));
+  P.forEach((p,i)=>{const s=p.el;s.classList.toggle('out',p.out);s.classList.toggle('fold',p.fold&&!p.out);s.classList.toggle('turn',G.phase==='bet'&&G.cur===i);s.classList.toggle('won',!!p.res);
+    s.querySelector('.pkname').textContent=p.human?T('You'):p.name;s.querySelector('.pkchips').textContent=fmt(p.chips);
+    const cs=s.querySelectorAll('.pkcards .pkc'),has=p.hole.length===2&&!p.out,show=p.human||p.shown;
+    cs.forEach((c,k)=>setCard(c,has?(show?p.hole[k]:'b'):''));
+    const st=s.querySelector('.pkst');let tx='',cl='pkst';
+    if(p.out)tx=T('Out');else if(p.res){tx='+'+fmt(p.res.n);cl+=' win'}else if(p.fold){tx=T('Fold');cl+=' fold'}else if(p.st)tx=T(p.st.k)+(p.st.n?' '+fmt(p.st.n):'');
+    st.className=cl;st.textContent=tx;
+    s.querySelector('.pkdesc').textContent=(p.shown&&!p.fold&&p.score&&G.board.length===5)?desc(p.score):'';
+    s.querySelector('.pkbet').textContent=p.bet>0?fmt(p.bet):'';
+    s.querySelector('.pkbtn').hidden=!(i===G.btn&&!p.out)});
+  if(!(G.phase==='bet'&&G.cur===0))Q('#pkAct').classList.add('off')}
+
+/* ---- start / end screens ---- */
+function ovStart(){ovMode='start';const ov=Q('#pkOv');
+  ov.innerHTML='<div class="pkbox"><h2>'+esc(T("Texas Hold'em"))+'</h2><p class="sub">'+esc(T('No-limit poker with play chips only. No real money.'))+'</p><p class="pkq">'+esc(T('Choose your opponents'))+'</p><div class="pkopp">'+[2,3,4,5].map(n=>'<button class="btn'+(n===opp?' pri':'')+'" data-opp="'+n+'" type="button">'+n+' '+esc(T('CPU'))+'</button>').join('')+'</div><p class="pkhint">'+esc(T('Everyone starts with 2,000 chips. Blinds go up every 6 hands.'))+'</p><div class="pkrow2"><button class="btn" data-help type="button">'+esc(T('How to play'))+'</button>'+(G&&G.phase!=='done'?'<button class="btn" data-back type="button">'+esc(T('Back to game'))+'</button>':'')+'<button class="btn" data-quit type="button">'+esc(T('Close'))+'</button></div></div>';
+  ov.hidden=false;const b=ov.querySelector('.pri');if(b&&isOpen())b.focus({preventScroll:true})}
+function ovEnd(win){ovMode=win?'win':'lose';const ov=Q('#pkOv');
+  ov.innerHTML='<div class="pkbox"><h2>'+esc(win?T('You won the table!'):T('You are out of chips'))+'</h2><p class="sub">'+esc(T('Hands played: {n}',{n:G.hand}))+' · '+esc(T('Best stack: {n}',{n:fmt(best)}))+'</p><div class="pkrow2"><button class="btn pri" data-again type="button">'+esc(T('Play again'))+'</button><button class="btn" data-quit type="button">'+esc(T('Close'))+'</button></div></div>';
+  ov.hidden=false;const b=ov.querySelector('.pri');if(b&&isOpen())b.focus({preventScroll:true})}
+
+/* ---- open / close ---- */
+function open(){el.inert=false;el.setAttribute('aria-hidden','false');el.classList.add('open');document.body.style.overflow='hidden';
+  if(!G){ovStart()}else{render();if(wait){const f=wait;wait=null;f()}else if(G.phase==='bet'&&G.cur===0&&!auto)prepAct()}
+  setTimeout(()=>{const b=Q('#pkOv:not([hidden]) .pri')||(!Q('#pkNext').hidden&&Q('#pkNext'))||Q('#pkClose');if(b)b.focus({preventScroll:true})},60)}
+function close(){el.classList.remove('open');el.inert=true;el.setAttribute('aria-hidden','true');document.body.style.overflow='';const l=$('logoBtn');if(l)l.focus({preventScroll:true})}
+function relang(){if(!G&&ovMode==='')return;if(ovMode==='start')ovStart();else if(ovMode==='win'||ovMode==='lose')ovEnd(ovMode==='win');
+  if(G){render();labels();if(lastMsg)Q('#pkMsg').textContent=lastMsg();if(G.phase==='bet'&&G.cur===0&&!auto){const keep=Q('#pkSl').value;prepAct();if(!Q('#pkRbox').hidden){Q('#pkSl').value=Q('#pkAmt').value=keep;rlabel()}}}
+  Q('#pkOdds').textContent=T(oddsOn?'Odds on':'Odds off');Q('#pkMute').textContent=T(soundOn?'Sound on':'Sound off')}
+
+/* ---- events ---- */
+Q('#pkFold').onclick=()=>humanDo('fold');
+Q('#pkCall').onclick=()=>humanDo('call');
+Q('#pkRaise').onclick=()=>{const sl=Q('#pkSl');humanDo('raise',clamp(Math.round(+Q('#pkAmt').value||+sl.min),+sl.min,+sl.max))};
+Q('#pkSl').addEventListener('input',e=>{Q('#pkAmt').value=e.target.value;rlabel()});
+Q('#pkAmt').addEventListener('input',e=>{const v=+e.target.value;if(v)Q('#pkSl').value=clamp(v,+Q('#pkSl').min,+Q('#pkSl').max);rlabel()});
+Q('#pkAmt').addEventListener('change',e=>{const v=clamp(Math.round(+e.target.value||+Q('#pkSl').min),+Q('#pkSl').min,+Q('#pkSl').max);e.target.value=Q('#pkSl').value=v;rlabel()});
+Q('#pkQuick').addEventListener('click',e=>{const b=e.target.closest('button');if(b)quick(b.dataset.q)});
+Q('#pkNext').onclick=()=>{if(G&&G.phase==='over')startHand()};
+Q('#pkClose').onclick=close;
+Q('#pkNew').onclick=()=>ovStart();
+Q('#pkHelp').onclick=()=>HELP.open('poker');
+Q('#pkMute').onclick=e=>{soundOn=!soundOn;e.currentTarget.setAttribute('aria-pressed',String(soundOn));e.currentTarget.textContent=T(soundOn?'Sound on':'Sound off')};
+Q('#pkOdds').onclick=e=>{oddsOn=!oddsOn;e.currentTarget.setAttribute('aria-pressed',String(oddsOn));e.currentTarget.textContent=T(oddsOn?'Odds on':'Odds off');if(G&&G.phase==='bet'&&G.cur===0)prepAct()};
+Q('#pkOv').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.opp)newGame(+b.dataset.opp);else if(b.hasAttribute('data-again'))ovStart();else if(b.hasAttribute('data-quit'))close();
+  else if(b.hasAttribute('data-help'))HELP.open('poker');else if(b.hasAttribute('data-back')){Q('#pkOv').hidden=true;ovMode='';if(G.phase==='bet'&&G.cur===0)prepAct()}});
+document.addEventListener('keydown',e=>{if(!isOpen()||HELP.isOpen())return;
+  const k=e.key,typing=e.target&&e.target.tagName==='INPUT'&&e.target.type==='number';
+  if(k==='Escape'){e.stopPropagation();e.preventDefault();if(!Q('#pkOv').hidden&&G&&G.phase!=='done'&&ovMode==='start'){Q('#pkOv').hidden=true;ovMode=''}else close();return}
+  if(!Q('#pkOv').hidden)return;
+  if(typing){if(k==='Enter'){e.stopPropagation();e.preventDefault();e.target.blur();Q('#pkRaise').click()}return}
+  const lk=k.toLowerCase();
+  if(!Q('#pkNext').hidden&&(k===' '||k==='Enter')){e.stopPropagation();e.preventDefault();Q('#pkNext').click();return}
+  if(!mine())return;
+  if(lk==='f'){e.stopPropagation();humanDo('fold')}
+  else if(lk==='c'||k===' '){e.stopPropagation();e.preventDefault();humanDo('call')}
+  else if(lk==='a'&&!Q('#pkRbox').hidden){e.stopPropagation();quick('all');Q('#pkRaise').click()}
+  else if(lk==='r'&&!Q('#pkRbox').hidden){e.stopPropagation();e.preventDefault();const a=Q('#pkAmt');a.focus();a.select()}
+  else if((k==='ArrowUp'||k==='ArrowDown')&&!Q('#pkRbox').hidden){e.stopPropagation();e.preventDefault();const sl=Q('#pkSl'),st=Math.max(5,Math.round(G.bb/2));sl.value=clamp(+sl.value+(k==='ArrowUp'?st:-st),+sl.min,+sl.max);Q('#pkAmt').value=sl.value;rlabel()}},true);
+Object.assign(D,{"Texas Hold'em":"เท็กซัส โฮลเอม","No-limit poker with play chips only. No real money.":"โป๊กเกอร์แบบไม่จำกัดเดิมพัน ใช้ชิปสมมติเท่านั้น ไม่มีเงินจริง","Choose your opponents":"เลือกจำนวนคู่แข่ง","CPU":"คอมพิวเตอร์","Everyone starts with 2,000 chips. Blinds go up every 6 hands.":"ทุกคนเริ่มด้วย 2,000 ชิป บลายด์เพิ่มขึ้นทุก 6 มือ","Back to game":"กลับไปเล่นต่อ","You won the table!":"คุณชนะทั้งโต๊ะ!","You are out of chips":"ชิปของคุณหมดแล้ว","Hands played: {n}":"จำนวนมือที่เล่น: {n}","Best stack: {n}":"ชิปสูงสุด: {n}","Play again":"เล่นอีกครั้ง","Best {n}":"สูงสุด {n}","Hand {n}":"มือที่ {n}","Blinds {a}/{b}":"บลายด์ {a}/{b}","Pot {n}":"พอต {n}","You":"คุณ","Out":"ออกจากเกม","Fold":"หมอบ","Check":"เช็ค","Call":"คอล","Call {n}":"คอล {n}","Raise":"เรส","Bet":"เดิมพัน","All-in":"ออลอิน","All-in {n}":"ออลอิน {n}","Raise to {n}":"เรสเป็น {n}","Bet {n}":"เดิมพัน {n}","Odds on":"โอกาส: เปิด","Odds off":"โอกาส: ปิด","New game":"เกมใหม่","Close poker":"ปิดโป๊กเกอร์","Min":"ต่ำสุด","½ pot":"½ พอต","Pot":"พอต","Next hand":"มือถัดไป","Raise amount":"จำนวนเรส","Raise to":"เรสเป็น","Poker":"โป๊กเกอร์","Texas Hold'em Poker":"โป๊กเกอร์ เท็กซัส โฮลเอม","Poker against the computer. Win all the chips!":"เล่นโป๊กเกอร์กับคอมพิวเตอร์ ชนะเอาชิปทั้งหมด!","Your turn":"ตาของคุณ","New hand. Cards are dealt.":"เริ่มมือใหม่ แจกไพ่แล้ว","Blinds up to {a}/{b}":"บลายด์เพิ่มเป็น {a}/{b}","All-in! Cards are turned up.":"ออลอิน! เปิดไพ่ทั้งหมด","Flop":"เฟลาป (ไพ่กลาง 3 ใบ)","Turn":"เทิร์น (ไพ่ใบที่ 4)","River":"ริเวอร์ (ไพ่ใบสุดท้าย)","Win chance {n}%":"โอกาสชนะ {n}%","You win {n}. Everyone else folded.":"คุณชนะ {n} ทุกคนหมอบหมด","{p} wins {n}. Everyone else folded.":"{p} ชนะ {n} ทุกคนหมอบหมด","You win {n} with {h}":"คุณชนะ {n} ด้วย {h}","{p} wins {n} with {h}":"{p} ชนะ {n} ด้วย {h}","Pot shared: {p}":"แบ่งพอต: {p}","You fold":"คุณหมอบ","{p} folds":"{p} หมอบ","You check":"คุณเช็ค","{p} checks":"{p} เช็ค","You call {n}":"คุณคอล {n}","{p} calls {n}":"{p} คอล {n}","You bet {n}":"คุณเดิมพัน {n}","{p} bets {n}":"{p} เดิมพัน {n}","You raise to {n}":"คุณเรสเป็น {n}","{p} raises to {n}":"{p} เรสเป็น {n}","You are all-in {n}":"คุณออลอิน {n}","{p} is all-in {n}":"{p} ออลอิน {n}","Royal flush":"รอยัลฟลัช","Straight flush, {r} high":"สเตรทฟลัช สูงสุด {r}","Four {r}":"โฟร์การ์ด {r}","Full house, {a} full of {b}":"ฟูลเฮาส์ {a} เต็ม {b}","Flush, {r} high":"ฟลัช สูงสุด {r}","Straight, {r} high":"สเตรท สูงสุด {r}","Three {r}":"สามใบ {r}","Two pair, {a} and {b}":"สองคู่ {a} กับ {b}","Pair of {r}":"หนึ่งคู่ {r}","High card {r}":"ไพ่สูง {r}",
+"Two":"สอง","Three":"สาม","Four":"สี่","Five":"ห้า","Six":"หก","Seven":"เจ็ด","Eight":"แปด","Nine":"เก้า","Ten":"สิบ","Jack":"แจ็ค","Queen":"ควีน","King":"คิง","Ace":"เอซ","Twos":"สอง","Threes":"สาม","Fours":"สี่","Fives":"ห้า","Sixes":"หก","Sevens":"เจ็ด","Eights":"แปด","Nines":"เก้า","Tens":"สิบ","Jacks":"แจ็ค","Queens":"ควีน","Kings":"คิง","Aces":"เอซ"});
+return{open,close,relang,get isOpen(){return isOpen()},t:{ev,desc,equity,newGame,decide,get G(){return G},fast:v=>{fast=v},auto:v=>{auto=v},next:()=>Q('#pkNext').click(),total:()=>G.P.reduce((s,p)=>s+p.chips+p.bet,0)+G.pot}}})();
+
+
 /* ===== Game picker (logo button) ===== */
 (()=>{const el=$('gpick'),logo=$('logoBtn');
   const op=()=>{el.inert=false;el.setAttribute('aria-hidden','false');el.classList.add('open');document.body.style.overflow='hidden';$('pickSnooker').focus()};
   const cl=(restore=true)=>{el.classList.remove('open');el.inert=true;el.setAttribute('aria-hidden','true');if(restore){document.body.style.overflow='';logo.focus({preventScroll:true})}};
-  logo.addEventListener('click',op);$('pickBlaster').onclick=()=>{cl(false);GM.open()};$('pickSnooker').onclick=()=>{cl(false);SN.open()};$('gpClose').onclick=()=>cl();
+  logo.addEventListener('click',op);$('pickBlaster').onclick=()=>{cl(false);GM.open()};$('pickSnooker').onclick=()=>{cl(false);SN.open()};$('pickPoker').onclick=()=>{cl(false);PK.open()};$('gpClose').onclick=()=>cl();
   el.addEventListener('click',e=>{if(e.target===el)cl()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el.classList.contains('open'))cl()});
   Object.assign(D,{"Choose a game":"เลือกเกม","3D space shooter. Blast the cubes!":"เกมยิงอวกาศสามมิติ ยิงลูกบาศก์ให้หมด!","Play snooker against the computer or a friend.":"เล่นสนุกเกอร์กับคอมพิวเตอร์หรือเพื่อน"})})();
 
@@ -1123,14 +1482,21 @@ const HELP=(()=>{const el=$('howto'),body=$('htBody');let from=null,which='',hel
     ['Shoot','Drag the power bar at the bottom and release to shoot. The further you drag, the harder the shot. On a keyboard, hold Space and release.'],
     ['White ball','Before the first shot, and after you pot the white, drag the white ball anywhere inside the D.'],
     ['Fouls','Potting the white, hitting nothing, hitting the wrong ball first or potting the wrong ball is a foul. Your opponent gets 4 to 7 points and your turn ends.'],
-    ['Modes','Play against the computer or take turns with a friend on the same device. Use the Menu button to switch.']]};
-  const TITLE={blaster:'Cube Blaster',snooker:'Snooker'};
+    ['Modes','Play against the computer or take turns with a friend on the same device. Use the Menu button to switch.']],
+   poker:[['Goal','Win chips from the computer players. Play until you or everyone else runs out of chips. Play chips only, no real money.'],
+    ['Each hand','You and every player get 2 private cards. Five shared cards then come to the table: 3 (the flop), 1 (the turn) and 1 (the river). Make the best 5-card hand from your 2 cards and the 5 shared cards.'],
+    ['Betting','In turn you can Fold (give up the hand), Check (pass, only when nobody has bet), Call (match the bet) or Raise (bet more). Use the slider, the quick buttons (Min, half pot, Pot, All-in) or type an amount, then press Raise.'],
+    ['Blinds','Two players post forced bets called blinds before the cards are dealt. The dealer button (D) moves every hand, and the blinds go up every 6 hands.'],
+    ['Hand ranks','From best to worst: straight flush, four of a kind, full house, flush, straight, three of a kind, two pair, one pair, high card.'],
+    ['All-in','If you bet all your chips you are all-in. You can only win the part of the pot you matched. Extra bets go into a side pot for the other players.'],
+    ['Keys','F fold, C or Space check or call, R choose the raise amount, A all-in, Up and Down change the amount, Enter confirm or next hand. The Odds button shows your win chance. H opens this help, Esc closes the game.']]};
+  const TITLE={blaster:'Cube Blaster',snooker:'Snooker',poker:"Texas Hold'em Poker"};
   function render(){body.innerHTML=`<p class="sub" style="margin:0 0 4px"><b>${esc(T(TITLE[which]))}</b></p>`+DATA[which].map(([h,x])=>`<h3>${esc(T(h))}</h3><ul><li>${esc(T(x))}</li></ul>`).join('')}
   function open(g){which=g;from=document.activeElement;render();held=g==='blaster'&&GM.mode==='play'&&!GM.paused;if(held)GM.pause(true);el.inert=false;el.setAttribute('aria-hidden','false');el.classList.add('open');$('htClose').focus()}
   function close(){el.classList.remove('open');el.inert=true;el.setAttribute('aria-hidden','true');if(held){GM.pause(false);held=false}if(from&&from.focus)from.focus({preventScroll:true})}
   const isOpen=()=>el.classList.contains('open');
   ['keydown','keyup'].forEach(ev=>document.addEventListener(ev,e=>{if(!isOpen())return;if(ev==='keydown'&&e.key==='Escape'){close()}e.stopImmediatePropagation()},true));
-  document.addEventListener('keydown',e=>{if(isOpen())return;if(e.key==='h'||e.key==='H'||e.key==='?'){if(GM.isOpen)open('blaster');else if(SN.open_)open('snooker')}});
+  document.addEventListener('keydown',e=>{if(isOpen())return;if(e.key==='h'||e.key==='H'||e.key==='?'){if(GM.isOpen)open('blaster');else if(SN.open_)open('snooker');else if(PK.isOpen)open('poker')}});
   $('htClose').onclick=close;el.addEventListener('click',e=>{if(e.target===el)close()});
   $('gmHelp').onclick=()=>open('blaster');$('snHelp').onclick=()=>open('snooker');document.querySelectorAll('[data-help]').forEach(b=>b.onclick=()=>open(b.dataset.help));
   Object.assign(D,{"How to play":"วิธีเล่น","Got it":"เข้าใจแล้ว","Goal":"เป้าหมาย","Move":"การเคลื่อนที่","Fire":"การยิง","Cubes and lives":"ลูกบาศก์และชีวิต","Combo":"คอมโบ","Power-ups":"ไอเทมพลัง","Keys":"ปุ่มลัด","Ball colors":"ลูกสี","Endgame":"ช่วงท้ายเฟรม","Aim":"การเล็ง","Shoot":"การยิง","White ball":"ลูกขาว","Fouls":"ฟาวล์","Modes":"โหมดการเล่น",
@@ -1152,6 +1518,8 @@ const HELP=(()=>{const el=$('howto'),body=$('htBody');let from=null,which='',hel
    "Mining":"ขุด","Trading":"เทรด","The QLI Platform from Qubic.li, a web platform used for Qubic mining.":"QLI Platform จาก Qubic.li เว็บแพลตฟอร์มที่ใช้สำหรับการขุด Qubic","Open platform":"เปิดแพลตฟอร์ม","Live Qubic mining dashboard with epoch progress, online miners and every miner's solutions, for SOLO and PPLNS. Apps for iOS and Android.":"แดชบอร์ดการขุด Qubic แบบสด แสดงความคืบหน้า Epoch นักขุดที่ออนไลน์ และผลเฉลยของนักขุดทุกคน สำหรับ SOLO และ PPLNS มีแอปบน iOS และ Android","Open Jetski Pool":"เปิด Jetski Pool","Meme token launch and trading on Qubic (QDoge Protocol): create a token, train it on the curve, then escape into a Qswap pool. Meme tokens are very risky.":"แพลตฟอร์มเปิดตัวและเทรดมีมโทเคนบน Qubic (QDoge Protocol): สร้างโทเคน ฝึกบนเส้นโค้งราคา แล้วหลุดออกไปเป็นพูล Qswap มีมโทเคนเสี่ยงสูงมาก","Open The Yard":"เปิด The Yard"});
   return{open,close,isOpen}})();
 
+
+Object.assign(D,{"Win chips from the computer players. Play until you or everyone else runs out of chips. Play chips only, no real money.":"ชนะชิปจากผู้เล่นคอมพิวเตอร์ เล่นไปจนกว่าคุณหรือคนอื่นทั้งหมดจะชิปหมด ใช้ชิปสมมติเท่านั้น ไม่มีเงินจริง","Each hand":"แต่ละมือ","You and every player get 2 private cards. Five shared cards then come to the table: 3 (the flop), 1 (the turn) and 1 (the river). Make the best 5-card hand from your 2 cards and the 5 shared cards.":"ทุกคนได้ไพ่ลับ 2 ใบ จากนั้นไพ่กลางโต๊ะ 5 ใบจะเปิดทีละช่วง: 3 ใบ (เฟลาป) 1 ใบ (เทิร์น) และ 1 ใบ (ริเวอร์) ให้จัดไพ่ 5 ใบที่ดีที่สุดจากไพ่ในมือ 2 ใบรวมกับไพ่กลาง","Betting":"การเดิมพัน","In turn you can Fold (give up the hand), Check (pass, only when nobody has bet), Call (match the bet) or Raise (bet more). Use the slider, the quick buttons (Min, half pot, Pot, All-in) or type an amount, then press Raise.":"ถึงตาคุณเลือกได้: หมอบ (ยอมแพ้มือนี้) เช็ค (ผ่าน ใช้ได้เมื่อยังไม่มีใครเดิมพัน) คอล (ตามเดิมพัน) หรือเรส (เพิ่มเดิมพัน) ใช้แถบเลื่อน ปุ่มลัด (ต่ำสุด ครึ่งพอต พอต ออลอิน) หรือพิมพ์จำนวน แล้วกดเรส","Blinds":"บลายด์","Two players post forced bets called blinds before the cards are dealt. The dealer button (D) moves every hand, and the blinds go up every 6 hands.":"ก่อนแจกไพ่ ผู้เล่น 2 คนต้องวางเดิมพันบังคับเรียกว่าบลายด์ ปุ่มเจ้ามือ (D) ขยับทุกมือ และบลายด์จะเพิ่มขึ้นทุก 6 มือ","Hand ranks":"ลำดับไพ่","From best to worst: straight flush, four of a kind, full house, flush, straight, three of a kind, two pair, one pair, high card.":"จากดีที่สุดไปแย่ที่สุด: สเตรทฟลัช โฟร์การ์ด ฟูลเฮาส์ ฟลัช สเตรท สามใบ สองคู่ หนึ่งคู่ ไพ่สูง","If you bet all your chips you are all-in. You can only win the part of the pot you matched. Extra bets go into a side pot for the other players.":"ถ้าคุณเดิมพันชิปทั้งหมดคือออลอิน คุณชนะได้เฉพาะส่วนของพอตที่คุณตามถึง เดิมพันส่วนเกินจะเข้าไซด์พอตของผู้เล่นคนอื่น","F fold, C or Space check or call, R choose the raise amount, A all-in, Up and Down change the amount, Enter confirm or next hand. The Odds button shows your win chance. H opens this help, Esc closes the game.":"F หมอบ, C หรือ Space เช็ค/คอล, R เลือกจำนวนเรส, A ออลอิน, ลูกศรขึ้น/ลงปรับจำนวน, Enter ยืนยันหรือไปมือถัดไป ปุ่มโอกาสจะแสดงโอกาสชนะของคุณ กด H เปิดวิธีเล่น กด Esc เพื่อปิดเกม"});
 
 /* ===== Suomsiang assistant: built-in guide. Answers from this app's data; replies in the language you type (Thai or English) ===== */
 const BOT=(()=>{
@@ -1193,7 +1561,8 @@ const I=[
  {id:'partners',w:3,p:[/partner|ecosystem|\blinks?\b|docs|github/,/พันธมิตร|ลิงก์|ระบบนิเวศ|เอกสาร|กิตฮับ/],a:L=>({t:q('The Partners tab lists the official Qubic channels (qubic.org, explorer, wallet, docs, GitHub), QubicSwap, QX, two mining sites, The Yard, Qubic Church and our trading dashboard.','แท็บพันธมิตรรวมช่องทางทางการของ Qubic (qubic.org, explorer, wallet, docs, GitHub) QubicSwap QX เว็บขุดสองเว็บ The Yard Qubic Church และแดชบอร์ดการเทรดของเรา',L),b:[G('Partners','พันธมิตร','partners')]})},
  {id:'blaster',w:3,p:[/blaster|cube|space ?ship|shooter|shoot(ing)? game/,/ยิง|ยานอวกาศ|ลูกบาศก์|เคิบ/],a:L=>({t:q('Cube Blaster: click the Qubic logo on the left and choose Cube Blaster. Move the mouse or your finger. The ship fires by itself. Shoot the cubes and grab the power-ups (R rapid fire, 3 triple shot, + extra life). Press H in the game for full instructions.','Cube Blaster: คลิกโลโก้ Qubic ด้านซ้ายแล้วเลือก Cube Blaster ขยับเมาส์หรือนิ้วบังคับยาน ยานยิงเองอัตโนมัติ ยิงลูกบาศก์และเก็บไอเทมพลัง (R ยิงเร็ว 3 ยิง 3 ทาง + เพิ่มชีวิต) กด H ในเกมเพื่อดูวิธีเล่นเต็ม ๆ',L),b:[F('Play Cube Blaster','เล่น Cube Blaster','blaster'),F('How to play','วิธีเล่น','helpB')]})},
  {id:'snooker',w:4,p:[/snooker|billiard|cue ball|pool table|potting/,/สนุกเกอร์|บิลเลียด|ลูกขาว|ไม้คิว|ลงหลุม/],a:L=>({t:q('Snooker: click the Qubic logo and choose Snooker. Pot a red then a color, and repeat. Move the mouse or finger to aim, drag the power bar and release to shoot. Play the computer or a friend. Press H for the full rules.','สนุกเกอร์: คลิกโลโก้ Qubic แล้วเลือก Snooker ลงลูกแดงแล้วตามด้วยลูกสี ทำซ้ำไปเรื่อย ๆ ขยับเมาส์หรือนิ้วเพื่อเล็ง ลากแถบแรงแล้วปล่อยเพื่อยิง เล่นกับคอมพิวเตอร์หรือเพื่อนได้ กด H เพื่อดูกติกาเต็ม',L),b:[F('Play Snooker','เล่นสนุกเกอร์','snooker'),F('How to play','วิธีเล่น','helpS')]})},
- {id:'games',w:2,p:[/game|\bplay\b|arcade|fun/,/เกม|เล่น|สนุก/],a:L=>({t:q('There are two games. Click the Qubic logo on the left and pick Cube Blaster (3D space shooter) or Snooker. Each has a How to play button.','มีเกมสองเกม คลิกโลโก้ Qubic ด้านซ้ายแล้วเลือก Cube Blaster (ยิงอวกาศ 3 มิติ) หรือ Snooker ทั้งสองเกมมีปุ่มวิธีเล่น',L),b:[F('Cube Blaster','Cube Blaster','blaster'),F('Snooker','สนุกเกอร์','snooker')]})},
+ {id:'poker',w:4,p:[/poker|texas|hold ?'?em|card game/,/โป๊กเกอร์|โปเกอร์|โป๊ก|ไพ่|เท็กซัส/],a:L=>({t:q("Texas Hold'em poker: click the Qubic logo and choose Poker. Play with pretend chips against 2 to 5 computer players. Fold, check, call or raise, and the best 5-card hand wins the pot. Press H in the game for the full rules.","โป๊กเกอร์เท็กซัสโฮลเอม: คลิกโลโก้ Qubic แล้วเลือก Poker เล่นด้วยชิปสมมติกับคอมพิวเตอร์ 2 ถึง 5 คน เลือกหมอบ เช็ค คอล หรือเรส ใครได้ไพ่ 5 ใบที่ดีที่สุดชนะพอต กด H ในเกมเพื่อดูกติกาเต็ม ๆ",L),b:[F('Play Poker','เล่นโป๊กเกอร์','poker'),F('How to play','วิธีเล่น','helpP')]})},
+ {id:'games',w:2,p:[/game|\bplay\b|arcade|fun/,/เกม|เล่น|สนุก/],a:L=>({t:q('There are three games. Click the Qubic logo on the left and pick Cube Blaster (3D space shooter), Snooker or Texas Hold\'em Poker. Each has a How to play button.','มีเกมสามเกม คลิกโลโก้ Qubic ด้านซ้ายแล้วเลือก Cube Blaster (ยิงอวกาศ 3 มิติ) สนุกเกอร์ หรือโป๊กเกอร์ เท็กซัส โฮลเอม ทุกเกมมีปุ่มวิธีเล่น',L),b:[F('Cube Blaster','Cube Blaster','blaster'),F('Snooker','สนุกเกอร์','snooker'),F('Poker','โป๊กเกอร์','poker')]})},
  {id:'music',w:3,p:[/music|mp3|mp4|song|video|player|playlist|audio/,/เพลง|เครื่องเล่น|วิดีโอ|เสียง|คลื่นเสียง/],a:L=>({t:q('Open the Player tab on the right edge. Add MP3 or MP4 files, and the waves dance to the beat. You can change the wave style and colors. Your songs stay in your browser.','เปิดแท็บเครื่องเล่นที่ขอบขวา เพิ่มไฟล์ MP3 หรือ MP4 แล้วคลื่นเสียงจะเต้นตามจังหวะ เปลี่ยนรูปแบบและสีของคลื่นได้ เพลงจะเก็บไว้ในเบราว์เซอร์ของคุณ',L)})},
  {id:'theme',w:3,p:[/colou?r|theme|dark|light mode|accent|pink/,/สีธีม|ธีม|โหมดมืด|โหมดสว่าง|เปลี่ยนสี|สีหลัก|ชมพู/],a:L=>({t:q('Press the Colors button in the header: pick a preset, or choose your own accent, background and card colors. The Light/Dark button switches modes.','กดปุ่มสีที่หัวเว็บ เลือกชุดสีสำเร็จรูปหรือเลือกสีหลัก สีพื้นหลัง สีการ์ดเอง ปุ่มสว่าง/มืดใช้สลับโหมด',L),b:[F('Open Colors','เปิดแผงสี','colors')]})},
  {id:'bg',w:3,p:[/background|wallpaper|picture|image|photo|transparen|opacity/,/background.*video|video.*background|live wallpaper|วิดีโอพื้นหลัง|พื้นหลัง.*(วิดีโอ|วีดีโอ|คลิป)|(วิดีโอ|วีดีโอ|คลิป).*พื้นหลัง/,/พื้นหลัง|วอลเปเปอร์|รูปภาพ|ภาพ|โปร่งแสง|ความชัด/],a:L=>({t:q('In the Colors panel use Background image: pick one of the examples or upload your own picture or a short video, then set the background opacity and the card transparency. Your picture stays in your browser.','ในแผงสี ส่วนภาพพื้นหลัง เลือกภาพตัวอย่างหรืออัปโหลดรูปหรือวิดีโอสั้นของคุณเอง แล้วปรับความชัดของพื้นหลังและความโปร่งแสงของการ์ด รูปจะเก็บไว้ในเบราว์เซอร์ของคุณ',L),b:[F('Open Colors','เปิดแผงสี','colors')]})},
@@ -1729,6 +2098,16 @@ TX.vi.install="Bạn có thể cài SUOMSIANG CRYPTO thành ứng dụng trên m
 TX.id.install="Anda bisa memasang SUOMSIANG CRYPTO sebagai aplikasi di PC atau ponsel. Di Chrome atau Edge, klik ikon Instal di ujung kanan bilah alamat (atau tombol Instal di header). Di iPhone atau iPad ketuk Bagikan lalu Tambah ke Layar Utama. Aplikasi terbuka di jendela sendiri, tetapi data langsung tetap butuh internet.";
 TX.ru.install="SUOMSIANG CRYPTO можно установить как приложение на компьютер или телефон. В Chrome или Edge нажмите значок «Установить» в правой части адресной строки (или кнопку «Установить» в шапке). На iPhone или iPad нажмите «Поделиться», затем «На экран Домой». Оно открывается в отдельном окне, но для живых данных нужен интернет.";
 TX.ar.install="يمكنك تثبيت SUOMSIANG CRYPTO كتطبيق على الكمبيوتر أو الهاتف. في Chrome أو Edge انقر على أيقونة التثبيت في أقصى يمين شريط العنوان (أو زر التثبيت في الشريط العلوي). على iPhone أو iPad اضغط مشاركة ثم إضافة إلى الشاشة الرئيسية. يُفتح في نافذته الخاصة، لكن البيانات المباشرة تحتاج إلى الإنترنت.";
+X.poker=/poker|póquer|póker|扑克|ポーカー|포커|покер/;XA.poker=/بوكر/;
+TX.fr.games="Il y a trois jeux. Cliquez sur le logo Qubic à gauche et choisissez Cube Blaster (tir spatial 3D), Snooker ou Poker Texas Hold'em. Chacun a un bouton Comment jouer.";TX.fr.poker="Poker Texas Hold'em : cliquez sur le logo Qubic et choisissez Poker. Jouez avec des jetons fictifs contre 2 à 5 joueurs de l'ordinateur. Foldez, checkez, suivez ou relancez ; la meilleure main de 5 cartes gagne le pot. Appuyez sur H dans le jeu pour les règles complètes.";
+TX.es.games="Hay tres juegos. Haz clic en el logo de Qubic a la izquierda y elige Cube Blaster (disparos espaciales 3D), Snooker o Póquer Texas Hold'em. Cada uno tiene un botón Cómo jugar.";TX.es.poker="Póquer Texas Hold'em: haz clic en el logo de Qubic y elige Póquer. Juegas con fichas ficticias contra 2 a 5 jugadores de la computadora. Retírate, pasa, iguala o sube; gana el bote la mejor mano de 5 cartas. Pulsa H en el juego para ver las reglas completas.";
+TX.zh.games="共有三个游戏。点击左侧的 Qubic 标志，选择 Cube Blaster（3D 太空射击）、斯诺克或德州扑克。每个游戏都有“玩法”按钮。";TX.zh.poker="德州扑克：点击 Qubic 标志，选择德州扑克。使用虚拟筹码对战 2 到 5 位电脑玩家。可弃牌、过牌、跟注或加注，最大的五张牌组合赢得底池。游戏中按 H 查看完整规则。";
+TX.ja.games="ゲームは3つあります。左のQubicロゴをクリックして、Cube Blaster（3D宇宙シューティング）、スヌーカー、テキサスホールデム・ポーカーから選んでください。どれにも「遊び方」ボタンがあります。";TX.ja.poker="テキサスホールデム・ポーカー：Qubicロゴをクリックしてポーカーを選びます。仮想チップで2〜5人のコンピューターと対戦します。フォールド、チェック、コール、レイズができ、5枚で最も強い役がポットを獲得します。ゲーム中にHキーで詳しいルールが出ます。";
+TX.ko.games="게임은 세 가지입니다. 왼쪽 Qubic 로고를 클릭해 Cube Blaster(3D 우주 슈팅), 스누커, 텍사스 홀덤 포커 중에서 선택하세요. 각각 '플레이 방법' 버튼이 있습니다.";TX.ko.poker="텍사스 홀덤 포커: Qubic 로고를 클릭하고 포커를 선택하세요. 가상 칩으로 컴퓨터 상대 2~5명과 대결합니다. 폴드, 체크, 콜, 레이즈를 할 수 있고 5장 중 가장 높은 족보가 팟을 가져갑니다. 게임 중 H 키로 전체 규칙을 볼 수 있습니다.";
+TX.vi.games="Có ba trò chơi. Nhấp logo Qubic bên trái và chọn Cube Blaster (bắn tàu vũ trụ 3D), Snooker hoặc Poker Texas Hold'em. Mỗi game có nút Cách chơi.";TX.vi.poker="Poker Texas Hold'em: nhấp logo Qubic rồi chọn Poker. Chơi bằng chip ảo với 2 đến 5 đối thủ máy. Bạn có thể bỏ bài, xem bài, theo hoặc tố; bộ 5 lá mạnh nhất thắng pot. Nhấn H trong game để xem luật đầy đủ.";
+TX.id.games="Ada tiga game. Klik logo Qubic di kiri lalu pilih Cube Blaster (penembak luar angkasa 3D), Snooker, atau Poker Texas Hold'em. Masing-masing punya tombol Cara bermain.";TX.id.poker="Poker Texas Hold'em: klik logo Qubic lalu pilih Poker. Main dengan chip virtual melawan 2 sampai 5 pemain komputer. Bisa fold, check, call, atau raise; kombinasi 5 kartu terbaik menang pot. Tekan H di dalam game untuk aturan lengkap.";
+TX.ru.games="Игр три. Нажмите на логотип Qubic слева и выберите Cube Blaster (3D-космический шутер), снукер или покер Техасский холдем. У каждой есть кнопка «Как играть».";TX.ru.poker="Покер Техасский холдем: нажмите на логотип Qubic и выберите покер. Играйте на игровые фишки против 2–5 компьютерных игроков. Можно сбросить карты, пропустить, уравнять или повысить; лучшая комбинация из 5 карт забирает банк. Нажмите H в игре для полных правил.";
+TX.ar.games="هناك ثلاث ألعاب. انقر على شعار Qubic على اليسار واختر Cube Blaster (إطلاق نار فضائي ثلاثي الأبعاد) أو السنوكر أو بوكر تكساس هولدم. لكل منها زر كيف تلعب.";TX.ar.poker="بوكر تكساس هولدم: انقر على شعار Qubic واختر البوكر. تلعب برقائق وهمية ضد 2 إلى 5 لاعبين من الكمبيوتر. يمكنك الانسحاب أو التمرير أو المجاراة أو الرفع، وأقوى يد من 5 أوراق تربح الوعاء. اضغط H داخل اللعبة لقراءة القواعد كاملة.";
 I.forEach(it=>{it.x=X[it.id];it.xa=XA[it.id]});
 const LW={
  fr:"jeux il elle confidentialité aide minage graphique portefeuille bougie suivre partenaire explorateur rechercher chercher qualité capitalisation brûlés langue couleur thème musique billard église actifs le la les un une des du est sont quel quelle quels quelles comment où ou et je tu vous nous pour avec sur dans prix combien acheter vendre bonjour salut merci cours jeu jouer fonctionne peux peut puis c'est qu'est-ce que qui quoi pourquoi donne montre moi mon ma mes ce cette ces au aux pas très bien site application graphique marché marchés".split(' '),
@@ -1763,7 +2142,7 @@ function build(it,L){if(L==='en'||L==='th')return it?it.a(L):FALL(L);const Tt=TX
  return{t,b}}
 
 function match(txt){const t=txt.toLowerCase(),ta=/[\u0600-\u06FF]/.test(t)?normAr(t):null;let best=null,bs=0;for(const it of I){let s=0;for(const re of it.p)if(re.test(t))s+=it.w;if(it.x&&it.x.test(t))s+=it.w;if(it.xa&&ta&&it.xa.test(ta))s+=it.w;if(s>bs){bs=s;best=it}}return best}
-const ACT={chart:()=>openFS(),colors:()=>{if($('tpanel').hidden)$('colorBtn').click()},blaster:()=>GM.open(),snooker:()=>SN.open(),helpB:()=>HELP.open('blaster'),helpS:()=>HELP.open('snooker')};
+const ACT={chart:()=>openFS(),colors:()=>{if($('tpanel').hidden)$('colorBtn').click()},blaster:()=>GM.open(),snooker:()=>SN.open(),poker:()=>PK.open(),helpP:()=>HELP.open('poker'),helpB:()=>HELP.open('blaster'),helpS:()=>HELP.open('snooker')};
 function add(who,text,btns,L){const d=document.createElement('div');d.className='asm '+who;if(who==='a'){const im=document.createElement('img');im.src=AV;im.alt='';d.appendChild(im)}
   const w=document.createElement('div');w.style.minWidth='0';const b=document.createElement('div');b.className='asb';b.dir='auto';b.textContent=text;w.appendChild(b);
   if(btns&&btns.length){const r=document.createElement('div');r.className='asbtns';if(L==='ar')r.dir='rtl';btns.forEach(x=>{const lab=L==='th'?x.l[1]:x.l[0];let e;
@@ -1785,14 +2164,37 @@ return{ask,open,close,match,detect,get isOpen(){return isOpen}}})();
 
 
 /* ===== Install as an app (PWA): header button + service worker ===== */
-(()=>{let dp=null;const b=$('instBtn'),root=document.documentElement,standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true,ios=/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.MSStream;
+const INST=(()=>{let dp=null;const b=$('instBtn'),root=document.documentElement,dlg=$('instInfo'),body=$('instBody'),standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true,ios=/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.MSStream;
   const show=v=>{b.hidden=!v;root.classList.toggle('can-install',v)};
+  show(!standalone());
   window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;if(!standalone())show(true)});
   window.addEventListener('appinstalled',()=>{dp=null;show(false);toast(T('App installed'))});
-  if(ios&&!standalone())show(true);
-  b.onclick=async()=>{if(dp){dp.prompt();try{await dp.userChoice}catch(e){}dp=null;show(false)}else toast(T('To install on iPhone or iPad: tap Share, then Add to Home Screen'),6)};
+  let last=null;
+  const openD=()=>{dlg.inert=false;dlg.setAttribute('aria-hidden','false');dlg.classList.add('open');$('instOk').focus()};
+  const closeD=()=>{dlg.classList.remove('open');dlg.inert=true;dlg.setAttribute('aria-hidden','true');b.focus({preventScroll:true})};
+  $('instOk').onclick=closeD;dlg.addEventListener('click',e=>{if(e.target===dlg)closeD()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&dlg.classList.contains('open')){e.stopPropagation();closeD()}},true);
+  const ua=navigator.userAgent,edge=/Edg\//.test(ua),chrome=/Chrome\//.test(ua)&&!edge&&!/OPR\//.test(ua);
+  async function diag(){const r=[],chk=async f=>{try{const x=await fetch(f,{cache:'no-store'});r.push([f,x.ok])}catch(e){r.push([f,false])}};
+    r.push([location.protocol==='https:'||location.hostname==='localhost'?'HTTPS':'HTTPS (needed)',location.protocol==='https:'||location.hostname==='localhost']);
+    await chk('manifest.webmanifest');await chk('sw.js');await chk('brand/suomsiang-icon-192.png');await chk('brand/suomsiang-icon-512.png');
+    let sw=false;try{const g=await navigator.serviceWorker.getRegistration();sw=!!(g&&g.active)}catch(e){}r.push(['Service worker',sw]);return r}
+  function paint(){if(!last)return;const bad=last.filter(x=>!x[1]),browser=chrome||edge;
+    let h='<p class="sub" style="margin:0 0 6px">'+esc(T('Your browser did not offer the install window yet. Here is how to install and what was checked.'))+'</p>';
+    h+='<h3>'+esc(T('Install on PC'))+'</h3><ul>';
+    if(!browser)h+='<li>'+esc(T('This browser cannot install web apps. Open this page in Chrome or Edge.'))+'</li>';
+    h+='<li>'+esc(T('Chrome: open the three-dot menu, then choose Cast, save and share, then Install page as app (or Install SUOMSIANG CRYPTO).'))+'</li><li>'+esc(T('Edge: open the three-dot menu, then Apps, then Install this site as an app.'))+'</li><li>'+esc(T('You can also click the small Install icon at the right end of the address bar when it appears.'))+'</li></ul>';
+    h+='<h3>'+esc(T('Checks on this page'))+'</h3><ul class="instlist">'+last.map(x=>'<li><b class="'+(x[1]?'ok':'no')+'">'+(x[1]?'\u2713':'\u2717')+'</b><code>'+esc(x[0])+'</code><span>'+esc(x[1]?T('OK'):T('Missing or not working'))+'</span></li>').join('')+'</ul>';
+    h+='<p class="sub" style="margin:8px 0 0">'+esc(bad.length?T('Upload the missing files to the same folder as index.html on GitHub, wait one minute, then press Ctrl+F5.'):T('All files are found. If the app is already installed, open it from chrome://apps or the Start menu. If you closed the install window before, Chrome may wait a few days before asking again, so use the menu steps above.'))+'</p>';
+    body.innerHTML=h}
+  b.onclick=async()=>{
+    if(dp){const p=dp;dp=null;try{p.prompt();const r=await p.userChoice;if(r&&r.outcome==='accepted')show(false)}catch(e){}return}
+    if(ios){toast(T('To install on iPhone or iPad: tap Share, then Add to Home Screen'),6);return}
+    last=[['…',true]];body.innerHTML='<p class="sub">'+esc(T('Checking...'))+'</p>';openD();
+    last=await diag();paint()};
   if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})});
-  Object.assign(D,{"Install":"ติดตั้ง","Install app":"ติดตั้งแอป","App installed":"ติดตั้งแอปแล้ว","To install on iPhone or iPad: tap Share, then Add to Home Screen":"ติดตั้งบน iPhone/iPad: กดแชร์ แล้วเลือกเพิ่มลงในหน้าจอโฮม"})})();
+  Object.assign(D,{"Install":"ติดตั้ง","Install app":"ติดตั้งแอป","App installed":"ติดตั้งแอปแล้ว","To install on PC: click the Install icon at the right end of the address bar, or open the browser menu and choose Install app":"ติดตั้งบนคอมพิวเตอร์: กดไอคอนติดตั้งที่ปลายแถบที่อยู่ หรือเปิดเมนูเบราว์เซอร์แล้วเลือก ติดตั้งแอป","To install on iPhone or iPad: tap Share, then Add to Home Screen":"ติดตั้งบน iPhone/iPad: กดแชร์ แล้วเลือกเพิ่มลงในหน้าจอโฮม","Install on your PC":"ติดตั้งบนคอมพิวเตอร์","Install on PC":"ติดตั้งบนคอมพิวเตอร์","Got it":"เข้าใจแล้ว","Checking...":"กำลังตรวจสอบ...","Checks on this page":"ผลตรวจสอบในหน้านี้","OK":"ปกติ","Missing or not working":"ไม่พบหรือใช้งานไม่ได้","HTTPS (needed)":"HTTPS (จำเป็น)","Service worker":"Service worker","Your browser did not offer the install window yet. Here is how to install and what was checked.":"เบราว์เซอร์ยังไม่เด้งหน้าต่างติดตั้งให้ นี่คือวิธีติดตั้งและสิ่งที่ตรวจสอบแล้ว","This browser cannot install web apps. Open this page in Chrome or Edge.":"เบราว์เซอร์นี้ติดตั้งเว็บแอปไม่ได้ ให้เปิดหน้านี้ใน Chrome หรือ Edge","Chrome: open the three-dot menu, then choose Cast, save and share, then Install page as app (or Install SUOMSIANG CRYPTO).":"Chrome: เปิดเมนูสามจุด เลือก ส่ง บันทึก และแชร์ (Cast, save and share) แล้วเลือก ติดตั้งหน้าเว็บเป็นแอป (Install page as app) หรือ ติดตั้ง SUOMSIANG CRYPTO","Edge: open the three-dot menu, then Apps, then Install this site as an app.":"Edge: เปิดเมนูสามจุด เลือก แอป (Apps) แล้วเลือก ติดตั้งไซต์นี้เป็นแอป","You can also click the small Install icon at the right end of the address bar when it appears.":"หรือกดไอคอนติดตั้งเล็ก ๆ ที่ปลายแถบที่อยู่ เมื่อมันปรากฏ","Upload the missing files to the same folder as index.html on GitHub, wait one minute, then press Ctrl+F5.":"อัปโหลดไฟล์ที่ขาดไปไว้โฟลเดอร์เดียวกับ index.html บน GitHub รอสักหนึ่งนาที แล้วกด Ctrl+F5","All files are found. If the app is already installed, open it from chrome://apps or the Start menu. If you closed the install window before, Chrome may wait a few days before asking again, so use the menu steps above.":"พบไฟล์ครบแล้ว ถ้าติดตั้งแอปไปแล้ว ให้เปิดจาก chrome://apps หรือเมนู Start ถ้าเคยปิดหน้าต่างติดตั้งไป Chrome อาจรอหลายวันก่อนถามอีก ให้ใช้ขั้นตอนจากเมนูด้านบนแทน"})
+  return{relang(){if(dlg.classList.contains('open'))paint()}}})();
 
 /* boot */
 applyLang();
